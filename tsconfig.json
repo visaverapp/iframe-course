@@ -1,23 +1,36 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "module": "esnext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "isolatedModules": true,
-    "moduleDetection": "force",
     "noEmit": true,
+    "jsx": "react-jsx",
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+
+    /*absolute paths*/
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build"],
+  "typeRoots": ["../node_modules/.d.ts", ".d.ts"]
 }

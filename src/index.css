@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/* Стили для полосы прокрутки */
+.scroll-bar::-webkit-scrollbar {
+    cursor: all-scroll;
+    width: 4px;
+}
+
+.scroll-bar::-webkit-scrollbar-track {
+    margin-top: 16px;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+    background: #D3DCE6;
+    border-radius: 10px;
+}
