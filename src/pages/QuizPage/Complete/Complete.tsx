@@ -29,7 +29,7 @@ export const Complete = () => {
       </div>
       <div>
         <span className='text-right block pb-[4px] font-open-sans text-[16px] font-normal text-black'>Ваш результат</span>
-        {correctCount === questionsCount && <span className='text-right block pb-[4px] font-open-sans text-[16px] font-normal text-black'>Ваш результат</span>}
+        {/*{correctCount === questionsCount && <span className='text-right block pb-[4px] font-open-sans text-[16px] font-normal text-black'>Ваш результат</span>}*/}
         <span className='block pb-[16px] font-open-sans text-[16px] font-bold text-black'>{setText()}</span>
 
         <div className='flex justify-end'>
