@@ -28,7 +28,9 @@ export const Question = ({ answers, correctAnswer, currentAnswer, question, goTo
 
   const onNextButtonHandler = () => {
     if (!questions.filter((q) => q.answer === null).length) {
+      if(isLastQuestion){
       setQuizDone();
+      }
     }
     questions.length > activeQuestionIndex + 1 && setActiveQuestionIndex(activeQuestionIndex + 1);
   };
@@ -56,7 +58,7 @@ export const Question = ({ answers, correctAnswer, currentAnswer, question, goTo
         <div className='flex pt-[16px] justify-between'>
           <div>
           {currentAnswer && correctAnswer !== currentAnswer && (
-              <button className='rounded-[10px] px-[18px] py-[6px] font-open-sans text-[14px] font-normal bg-dark-blue text-white-hover' onClick={()=>{}}>
+              <button className='rounded-[10px] px-[18px] py-[6px] font-open-sans text-[14px] font-normal bg-dark-blue text-white-hover' onClick={() => goToTime(start)}>
                 Смотреть фрагмент с ответом
               </button>
           )}
@@ -70,11 +72,11 @@ export const Question = ({ answers, correctAnswer, currentAnswer, question, goTo
           >
             <ArrowLeft stroke={`${activeQuestionIndex ? '#FFFFFF' : '#8492A6'}`}/>
           </button>
-          <button className={`${isLastQuestion ? 'bg-milk-white' : 'bg-indigo'} px-[30px] py-[4px] rounded-[8px]`}
+          <button className={'bg-indigo px-[30px] py-[4px] rounded-[8px]'}
                   onClick={onNextButtonHandler}
-              disabled={isLastQuestion}
+              // disabled={isLastQuestion}
           >
-            <ArrowRight stroke={`${!isLastQuestion ? '#FFFFFF' : '#8492A6'}`}/>
+            <ArrowRight stroke={'#FFFFFF'}/>
           </button>
           </div>
         </div>
@@ -82,3 +84,8 @@ export const Question = ({ answers, correctAnswer, currentAnswer, question, goTo
     </div>
   );
 };
+
+
+// className={`${isLastQuestion ? 'bg-milk-white' : 'bg-indigo'} px-[30px] py-[4px] rounded-[8px]`}
+
+// stroke={`${!isLastQuestion ? '#FFFFFF' : '#8492A6'}`}
