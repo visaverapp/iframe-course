@@ -36,7 +36,7 @@ export const Question = ({ answers, correctAnswer, currentAnswer, question, goTo
   return (
     <div>
         <div className='pb-[16px]'>
-          <p className='font-open-sans text-[16px] font-bold text-dark-blue'>Что говорил 1 мудрец?</p>
+          <p className='font-open-sans text-[16px] font-bold text-dark-blue'>{question}</p>
           <span className='font-open-sans text-[14px] font-normal text-dark-blue'>{`Вопрос ${activeQuestionIndex + 1} из ${questions.length}`}</span>
         </div>
       <div>
