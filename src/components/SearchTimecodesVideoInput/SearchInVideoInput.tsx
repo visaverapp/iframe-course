@@ -40,11 +40,11 @@ export const SearchInVideoInput = ({onChange}: SearchInVideoInputPropsType) => {
             className={`${isFocused ? 'w-[704px]' : 'w-[340px]'} focus:outline-none focus:border-light-gray self-end h-[40px] px-[16px] pt-[7px] pb-[10px] border-white-active border-[1px] rounded-[12px] text-[14px] text-dark-blue`}
         />
         <label className={`${isFocused && 'w-[97%] pointer-events-auto'} absolute left-[16px] top-[7px] pointer-events-none placeholder text-gray-default ${inputValue ? 'hidden' : ''}`}>
-          Какие слова ищем в этом <span className="font-bold">видео</span>?
+          Что ищем в этом <span className="font-bold">видео</span>?
           {isFocused ?
               <img className='cursor-pointer absolute right-[17px] top-[8px]' src={clear as string}
                    alt="clear"/>
-              : <img className='absolute right-[-63px] top-[1px]'  src={search as string} alt="search"
+              : <img className='absolute right-[-128px] top-[1px]'  src={search as string} alt="search"
                      onClick={clearInput}
               />
           }
