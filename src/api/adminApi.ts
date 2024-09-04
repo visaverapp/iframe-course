@@ -108,18 +108,18 @@ export const adminAPI = api.injectEndpoints({
   }),
 });
 
-export const {
-  useGetTimecodesAdminQuery,
-  useLazyGetTimecodesAdminQuery,
-  usePutTimecodesAdminMutation,
-  usePatchTimecodesAdminMutation,
-  useDeleteTimecodesAdminMutation,
-  useGetSummaryAdminQuery,
-  useDeleteSummaryAdminMutation,
-  useGetQuizzesAdminQuery,
-  useGetTransciptsAdminQuery,
-  useGetOneTranscriptAdminQuery,
-  usePutTranscriptsAdminMutation,
-  usePatchTranscriptsAdminMutation,
-  useDeleteTranscriptsAdminMutation,
-} = adminAPI;
+// export const {
+//   useGetTimecodesAdminQuery,
+//   useLazyGetTimecodesAdminQuery,
+//   usePutTimecodesAdminMutation,
+//   usePatchTimecodesAdminMutation,
+//   useDeleteTimecodesAdminMutation,
+//   useGetSummaryAdminQuery,
+//   useDeleteSummaryAdminMutation,
+//   useGetQuizzesAdminQuery,
+//   useGetTransciptsAdminQuery,
+//   useGetOneTranscriptAdminQuery,
+//   usePutTranscriptsAdminMutation,
+//   usePatchTranscriptsAdminMutation,
+//   useDeleteTranscriptsAdminMutation,
+// } = adminAPI;

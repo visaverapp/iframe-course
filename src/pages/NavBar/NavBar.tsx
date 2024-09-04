@@ -1,4 +1,3 @@
-import React from 'react';
 import close from "./images/close.svg"
 import menu from "./images/burger.svg"
 import watch from "./images/watch.svg"

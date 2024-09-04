@@ -16,7 +16,6 @@ import type {
   QuizApiResponse,
 } from '@/types';
 import {getSearchParamFromURL} from "@/utils/getSearchParamFromURL";
-import {FetchBaseQueryError} from "@reduxjs/toolkit/dist/query";
 
 
 const path = 'playlists';

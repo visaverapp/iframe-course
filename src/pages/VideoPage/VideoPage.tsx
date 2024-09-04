@@ -29,7 +29,7 @@ const video = {
 export const VideoPage = () => {
   const [tab, setTab] = useState(1)
   const [isActiveInput, setIsActiveInput] = useState(false)
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  // const [isCollapsed, setIsCollapsed] = useState(true);
   // const [currentTime] = useState(null);
 
 
@@ -39,11 +39,11 @@ export const VideoPage = () => {
 
   const onChange = (value: boolean) => {
     setIsActiveInput(value)
-    setIsCollapsed(false)
+    // setIsCollapsed(false)
   }
 
   const playlistId = 'c92ce130-e837-4db3-8278-638fca4b9f9a'
-  const id = '011701ad-8cf3-4346-b0f0-7c8d292c29ad'
+  // const id = '011701ad-8cf3-4346-b0f0-7c8d292c29ad'
   const startsForm = 0
 
 

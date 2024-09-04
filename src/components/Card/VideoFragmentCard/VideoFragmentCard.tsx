@@ -1,6 +1,7 @@
 import { VideoFragmentCardProps } from './VideoFragmentCard.props';
 
 import { memo } from 'react';
+import PlayIcon from "@/components/SVGIcons/PlayIcon";
 
 const VideoFragmentCard = ({
   fragment: { content, timestampLink },
