@@ -1,4 +1,3 @@
-import React from 'react';
 import summary from './images/Summary.png'
 
 export const Summary = () => {

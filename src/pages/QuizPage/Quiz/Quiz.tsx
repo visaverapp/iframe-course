@@ -101,7 +101,7 @@ const data = [
   },
 ];
 
-export const Quiz = ({publicId, playlistId, goToTime}: QuizProps) => {
+export const Quiz = ({ goToTime}: QuizProps) => {
   // const { data, isLoading, error } = useGetVideoQuizQuery({ playlistId: playlistId, videoPublicId: publicId });
 
   const [activeQuestionIndex, questions, done] = useAppSelector((state) => [

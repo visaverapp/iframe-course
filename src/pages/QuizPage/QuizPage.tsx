@@ -1,5 +1,3 @@
-import {useRef} from "react";
-import YouTube from "react-youtube";
 import {Quiz} from "@/pages/QuizPage/Quiz";
 
 const video = {
@@ -18,8 +16,8 @@ const playlistId = 'c92ce130-e837-4db3-8278-638fca4b9f9a'
 
 const QuizPage = () => {
 
-  const player = useRef<YouTube>(null);
-  const iframeWrapper = useRef<HTMLDivElement>(null);
+  // const player = useRef<YouTube>(null);
+  // const iframeWrapper = useRef<HTMLDivElement>(null);
 
   return (
     // <>

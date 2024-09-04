@@ -57,7 +57,7 @@ export const Timecodes = memo(() => {
   const [showTextIndex, setShowTextIndex] = useState(null)
   const [isCollapsed, setIsCollapsed] = useState(false)
 
-  const toggleText = (index) => {
+  const toggleText = (index: any) => {
     setShowTextIndex(prevIndex => (prevIndex === index ? null : index));
   };
 

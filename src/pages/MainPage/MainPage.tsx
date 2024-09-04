@@ -1,4 +1,3 @@
-import React from 'react';
 import {VideoPage} from "@/pages/VideoPage/VideoPage";
 import {Summary} from "@/pages/Summary/Summary";
 

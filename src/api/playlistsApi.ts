@@ -15,8 +15,9 @@ import type {
   SuggestVideoType,
   QuizApiResponse,
 } from '@/types';
+import {getSearchParamFromURL} from "@/utils/getSearchParamFromURL";
+import {FetchBaseQueryError} from "@reduxjs/toolkit/dist/query";
 
-import { getSearchParamFromURL } from '@/utils/getSearchParamFromURL';
 
 const path = 'playlists';
 
@@ -29,17 +30,17 @@ export const playlistsAPI = api.injectEndpoints({
         params,
       }),
       extraOptions: { maxRetries: 8 },
-      transformErrorResponse: (error) => {
-        console.log(error);
-        return { status: error.status };
-      },
+      // transformErrorResponse: (error: FetchBaseQueryError) => {
+      //   console.log(error);
+      //   return { status: error.status };
+      // },
       providesTags: (result) =>
-        result
-          ? [
-            ...result.results.map(({ publicId: id }) => ({ type: 'playlists' as const, id })),
-            { type: 'playlists', id: 'LIST' },
-          ]
-          : [{ type: 'playlists', id: 'LIST' }],
+          result
+              ? [
+                ...result.results.map(({ publicId: id }) => ({ type: 'playlists' as const, id })),
+                { type: 'playlists', id: 'LIST' },
+              ]
+              : [{ type: 'playlists', id: 'LIST' }],
     }),
 
     getPlaylistById: build.query<Playlist, { id: string } & { params?: PlaylistParams }>({
@@ -49,12 +50,12 @@ export const playlistsAPI = api.injectEndpoints({
         params,
       }),
       providesTags: (result, _, { id }) =>
-        result
-          ? [
-            { type: 'playlist' as const, id },
-            { type: 'playlist', id: 'one' },
-          ]
-          : [{ type: 'playlists', id: 'one' }],
+          result
+              ? [
+                { type: 'playlist' as const, id },
+                { type: 'playlist', id: 'one' },
+              ]
+              : [{ type: 'playlists', id: 'one' }],
     }),
 
     getPlaylistsByName: build.query<Playlist[], { name: string }>({
@@ -64,12 +65,12 @@ export const playlistsAPI = api.injectEndpoints({
         method: 'GET',
       }),
       providesTags: (result) =>
-        result
-          ? [
-            ...result.map(({ publicId: id }) => ({ type: 'playlists' as const, id })),
-            { type: 'playlists', id: 'LIST' },
-          ]
-          : [{ type: 'playlists', id: 'LIST' }],
+          result
+              ? [
+                ...result.map(({ publicId: id }) => ({ type: 'playlists' as const, id })),
+                { type: 'playlists', id: 'LIST' },
+              ]
+              : [{ type: 'playlists', id: 'LIST' }],
     }),
 
     //-----------------------------------------------------------------------------------------------------------------------------------
@@ -84,8 +85,8 @@ export const playlistsAPI = api.injectEndpoints({
     }),
 
     addVideoToPlaylist: build.mutation<
-      Playlist,
-      { playlistId: string; videos: { videoPublicId: string; isAiSuggested: boolean }[] }
+        Playlist,
+        { playlistId: string; videos: { videoPublicId: string; isAiSuggested: boolean }[] }
     >({
       query: ({ playlistId, videos }) => ({
         url: `${path}/${playlistId}/add-video/`,
@@ -183,12 +184,12 @@ export const playlistsAPI = api.injectEndpoints({
         method: 'GET',
       }),
       transformResponse: (response: TimecodesResponse) =>
-        response.results[0].data.timecodes
-          .filter((obj, index) => {
-            return index === response.results[0].data.timecodes.findIndex((t) => t.start === obj.start || t.text === obj.text);
-          })
-          .map((timecode) => ({ ...timecode, startOffsetMs: Math.round(timecode.start) }))
-          .sort((a, b) => a.startOffsetMs - b.startOffsetMs),
+          response.results[0].data.timecodes
+              .filter((obj, index) => {
+                return index === response.results[0].data.timecodes.findIndex((t) => t.start === obj.start || t.text === obj.text);
+              })
+              .map((timecode) => ({ ...timecode, startOffsetMs: Math.round(timecode.start) }))
+              .sort((a, b) => a.startOffsetMs - b.startOffsetMs),
     }),
     getDocs: build.query<string, TimecodesRequest>({
       query: ({ playlistId, videoPublicId }) => ({
@@ -199,8 +200,8 @@ export const playlistsAPI = api.injectEndpoints({
     }),
 
     getSuggestionVideos: build.query<
-      SuggestVideoType[],
-      Pick<Playlist, 'publicId'> & { previouslySuggestedVideos: string[] }
+        SuggestVideoType[],
+        Pick<Playlist, 'publicId'> & { previouslySuggestedVideos: string[] }
     >({
       query: ({ publicId, previouslySuggestedVideos }) => ({
         url: `${path}/${publicId}/suggest-video/`,
@@ -240,11 +241,11 @@ export const playlistsAPI = api.injectEndpoints({
         params,
       }),
       providesTags: (result, _, { playlistId }) =>
-        result
-          ? [
-            { type: 'quizzes', id: playlistId },
-          ]
-          : [{ type: 'quizzes', id: 'LIST' }],
+          result
+              ? [
+                { type: 'quizzes', id: playlistId },
+              ]
+              : [{ type: 'quizzes', id: 'LIST' }],
     }),
 
     getVideoQuiz: build.query<QuizApiResponse, TimecodesRequest>({
@@ -253,10 +254,10 @@ export const playlistsAPI = api.injectEndpoints({
         method: 'GET',
       }),
       providesTags: (_, __, { videoPublicId }) =>
-        [{ type: 'quiz', id: videoPublicId }],
+          [{ type: 'quiz', id: videoPublicId }],
     }),
 
   }),
 });
 
-export const { useGetTimecodesQuery, useLazyGetTimecodesQuery, useGetDocsQuery, useLazyGetDocsQuery, useGetVideoQuizQuery, useGetAllQuizzesQuery } = playlistsAPI;
+// export const { useGetTimecodesQuery, useLazyGetTimecodesQuery, useGetDocsQuery, useLazyGetDocsQuery, useGetVideoQuizQuery, useGetAllQuizzesQuery } = playlistsAPI;

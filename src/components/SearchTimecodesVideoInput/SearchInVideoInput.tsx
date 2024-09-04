@@ -1,12 +1,16 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import clear from './images/clear.svg'
 import search from './images/Search.svg'
 
-export const SearchInVideoInput = ({onChange}) => {
+type SearchInVideoInputPropsType = {
+  onChange: (value: boolean)=> void
+}
+
+export const SearchInVideoInput = ({onChange}: SearchInVideoInputPropsType) => {
   const [inputValue, setInputValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setInputValue(e.target.value.trim());
   };
   const handleFocus = () => {

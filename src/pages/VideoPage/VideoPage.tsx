@@ -23,14 +23,14 @@ const video = {
   ]
 }
 
-const searchVideos = []
+// const searchVideos = []
 
 
 export const VideoPage = () => {
   const [tab, setTab] = useState(1)
   const [isActiveInput, setIsActiveInput] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const [currentTime, setCurrentTime] = useState(null);
+  // const [currentTime] = useState(null);
 
 
   const iframe = useRef<YouTube>(null);
@@ -111,7 +111,7 @@ export const VideoPage = () => {
                     </>
                 )}
               </div>
-              {tab === 1 ? <Timecodes playlistId={playlistId || ''} id={id || ''} setTime={()=>{}} currentTime={currentTime} isCollapsed={isCollapsed}/> :
+              {tab === 1 ? <Timecodes/> :
                   tab === 2 ? <DescriptionTextVideo />
                       : tab === 3 ? <QuizPage></QuizPage> : <></> }
 

@@ -1,13 +1,10 @@
 import { VideoFragmentCardProps } from './VideoFragmentCard.props';
 
-import PlayIcon from '../../SvgIcons/PlayIcon';
-
 import { memo } from 'react';
 
 const VideoFragmentCard = ({
-  fragment: { content, timestampLink, image },
+  fragment: { content, timestampLink },
   goToTime,
-  videoPreview,
 }: VideoFragmentCardProps) => {
   const startsFrom = parseInt(timestampLink);
 

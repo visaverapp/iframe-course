@@ -13,10 +13,10 @@ export const categoriesAPI = api.injectEndpoints({
         params: params ? { ...params, pageSize: 14 } : undefined,
         method: 'GET',
       }),
-      transformErrorResponse: (error) => {
-        console.log(error);
-        return { status: error.status };
-      },
+      // transformErrorResponse: (error) => {
+      //   console.log(error);
+      //   return { status: error.status };
+      // },
 
       transformResponse: (data: GetList<Category>) => data.results,
 

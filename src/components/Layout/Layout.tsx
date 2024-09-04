@@ -1,4 +1,3 @@
-import React from 'react';
 import {NavBar} from "@/pages/NavBar/NavBar";
 import Footer from "@/pages/Footer/Footer";
 import {Outlet} from 'react-router-dom';

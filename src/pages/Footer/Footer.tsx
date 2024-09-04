@@ -1,4 +1,3 @@
-import React from 'react';
 import done from './images/Done.svg'
 import next from './images/next.svg'
 import prev from './images/prev.svg'

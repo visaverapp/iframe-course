@@ -1,9 +1,10 @@
 // import { baseQueryWithReauth } from './baseQueryWithReauth';
 
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query';
+import {baseQueryWithReauth} from "@/api/baseQueryWithReauth";
 
 export const api = createApi({
-  reducerPath: 'visaver',
+  // reducerPath: 'visaver',
   tagTypes: [
     'stat',
     'user',
@@ -22,7 +23,7 @@ export const api = createApi({
     'quiz',
     'quizzes',
   ],
-  // baseQuery: baseQueryWithReauth,
+  baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
   refetchOnReconnect: true,
   // refetchOnFocus: true,
