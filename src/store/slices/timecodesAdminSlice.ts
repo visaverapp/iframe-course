@@ -22,7 +22,7 @@ export const timecodesAdminSlice = createSlice({
       state.timecodesAdmin[index] = updatedData;
     },
     addTimecode: (state) => {
-      state.timecodesAdmin.push({ text: '', title: '', start: 0 });
+      state.timecodesAdmin.push({ text: '', start: 0 });
     },
   },
   extraReducers: (builder) => {

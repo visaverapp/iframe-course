@@ -1,6 +1,7 @@
 import { api } from './api';
 
-import { TimecodesResponse, TransformedTimecodesResponse, BaseAdminRequest, BaseTimecodesRequest, SummariesRequest } from '@/types';
+import { BaseAdminRequest, BaseTimecodesRequest, SummariesRequest } from '@/types';
+import {TransformedTimecodesResponse} from "@/types/playlistTypes";
 
 
 const path = 'control-panels';
@@ -13,21 +14,21 @@ export const adminAPI = api.injectEndpoints({
         url: `${path}/video/${videoPk}/timecodes`,
         method: 'GET',
       }),
-      transformResponse: (response: TimecodesResponse) => {
-        const timecodes = response.results[0].data.timecodes
-          .filter((obj, index) => {
-            return (
-              index ===
-              response.results[0].data.timecodes.findIndex((t) => t.start === obj.start || t.text === obj.text)
-            );
-          })
-          .map((timecode) => ({ ...timecode, startOffsetMs: Math.round(timecode.start) }))
-          .sort((a, b) => a.startOffsetMs - b.startOffsetMs);
-
-        const publicId = response.results[0].publicId; // Извлекаем publicId из результата
-
-        return { timecodes, publicId }; // Возвращаем как объект с обновленной структурой
-      },
+      // transformResponse: (response: TimecodesResponse) => {
+      //   const timecodes = response.results[0].data.timecodes
+      //     .filter((obj, index) => {
+      //       return (
+      //         index ===
+      //         response.results[0].data.timecodes.findIndex((t) => t.start === obj.start || t.text === obj.text)
+      //       );
+      //     })
+      //     .map((timecode) => ({ ...timecode, startOffsetMs: Math.round(timecode.start) }))
+      //     .sort((a, b) => a.startOffsetMs - b.startOffsetMs);
+      //
+      //   const publicId = response.results[0].publicId; // Извлекаем publicId из результата
+      //
+      //   return { timecodes, publicId }; // Возвращаем как объект с обновленной структурой
+      // },
     }),
     putTimecodesAdmin: build.mutation<void, BaseTimecodesRequest>({
       query: ({ videoPk, publicId, body }) => ({

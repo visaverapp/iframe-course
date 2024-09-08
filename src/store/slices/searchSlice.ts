@@ -1,6 +1,5 @@
-import { SearchAI } from '../../types';
-
 import { createSlice } from '@reduxjs/toolkit';
+import {SearchAI} from "@/types/videosTypes";
 
 type searchSliceProps = {
   statusSearch: boolean;

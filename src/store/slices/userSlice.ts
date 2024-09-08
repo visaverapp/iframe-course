@@ -3,7 +3,7 @@ import { RootState } from '../store';
 import { createSlice } from '@reduxjs/toolkit';
 import { decodeToken, isExpired } from 'react-jwt';
 
-import { usersAPI, authAPI } from '@/api';
+import { authAPI } from '@/api';
 import { ACCESS_TOKEN, REFRESH_TOKEN, ONBOARDING } from '@/constants';
 import { DecodedToken, OnBoardingType, UserStateType } from '@/types';
 
@@ -94,12 +94,12 @@ export const authUserSlice = createSlice({
       })
       //------------------------------------------------
 
-      .addMatcher(usersAPI.endpoints.getUserMe.matchFulfilled, (state, action) => {
-        state.avatar = action.payload.avatar;
-        state.user_id = action.payload.publicId;
-        state.username = action.payload.username;
-        state.isCommercial = action.payload.isCommercial;
-      })
+      // .addMatcher(usersAPI.endpoints.getUserMe.matchFulfilled, (state, action) => {
+      //   state.avatar = action.payload.avatar;
+      //   state.user_id = action.payload.publicId;
+      //   state.username = action.payload.username;
+      //   state.isCommercial = action.payload.isCommercial;
+      // })
 
       //выход
       .addMatcher(authAPI.endpoints.logOutUser.matchPending, (state) => {
@@ -113,22 +113,22 @@ export const authUserSlice = createSlice({
 
       //обновление
 
-      .addMatcher(usersAPI.endpoints.updateUser.matchFulfilled, (state, action) => {
-        state.username = action.payload.username;
-        state.email = action.payload.email;
-      })
-      .addMatcher(usersAPI.endpoints.updatePartialUserMe.matchFulfilled, (state, action) => {
-        state.avatar = action.payload.avatar;
-      })
+      // .addMatcher(usersAPI.endpoints.updateUser.matchFulfilled, (state, action) => {
+      //   state.username = action.payload.username;
+      //   state.email = action.payload.email;
+      // })
+      // .addMatcher(usersAPI.endpoints.updatePartialUserMe.matchFulfilled, (state, action) => {
+      //   state.avatar = action.payload.avatar;
+      // })
 
       //удаление
 
-      .addMatcher(usersAPI.endpoints.deleteUser.matchFulfilled, () => {
-        localStorage.removeItem(ACCESS_TOKEN);
-        localStorage.removeItem(ONBOARDING);
+      // .addMatcher(usersAPI.endpoints.deleteUser.matchFulfilled, () => {
+      //   localStorage.removeItem(ACCESS_TOKEN);
+      //   localStorage.removeItem(ONBOARDING);
 
         return initialState;
-      });
+      // });
   },
 });
 

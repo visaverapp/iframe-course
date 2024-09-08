@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { Category } from '@/types';
-
 import { categoriesAPI } from '@/api';
+import {Category} from "@/types/playlistTypes";
 
 type playlistsSliceProps = {
   categories: Category[];

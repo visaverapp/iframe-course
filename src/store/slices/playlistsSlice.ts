@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { playlistsAPI } from '@/api';
-import { Playlist } from '@/types';
+import {Playlist} from "@/types/playlistTypes";
 
 interface playlistsSliceProps {
   playlists: Playlist[];

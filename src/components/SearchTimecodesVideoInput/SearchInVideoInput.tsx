@@ -24,7 +24,6 @@ export const SearchInVideoInput = ({onChange}: SearchInVideoInputPropsType) => {
   };
 
   const clearInput = () => {
-    console.log('fdsdfsdf')
     setInputValue('');
     setIsFocused(false);
   };

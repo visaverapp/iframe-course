@@ -1,11 +1,11 @@
-import {useRef, useState} from "react";
+import {useState} from "react";
 import {
   SearchInVideoInput
 } from "@/components/SearchTimecodesVideoInput/SearchInVideoInput";
 import {Timecodes} from "@/pages/VideoPage/Timecodes/Timecodes";
-import YouTube from "react-youtube";
 import QuizPage from "@/pages/QuizPage/QuizPage";
-import {DescriptionTextVideo} from "@/pages/DescriptionTextVideo/DescriptionTextVideo";
+import {DescriptionTextVideo} from "@/pages/VideoPage/DescriptionTextVideo/DescriptionTextVideo";
+import {VideoCard} from "@/components/VideoCard/VideoCard";
 
 
 const video = {
@@ -33,9 +33,9 @@ export const VideoPage = () => {
   // const [currentTime] = useState(null);
 
 
-  const iframe = useRef<YouTube>(null);
-  const iframeWrapper = useRef<HTMLDivElement>(null);
-  const vkRef = useRef<HTMLIFrameElement>(null);
+  // const iframe = useRef<YouTube>(null);
+  // const iframeWrapper = useRef<HTMLDivElement>(null);
+  // const vkRef = useRef<HTMLIFrameElement>(null);
 
   const onChange = (value: boolean) => {
     setIsActiveInput(value)
@@ -43,8 +43,6 @@ export const VideoPage = () => {
   }
 
   const playlistId = 'c92ce130-e837-4db3-8278-638fca4b9f9a'
-  // const id = '011701ad-8cf3-4346-b0f0-7c8d292c29ad'
-  const startsForm = 0
 
 
   return (
@@ -52,26 +50,7 @@ export const VideoPage = () => {
         {/*{isLoading && <FullScreenLoader />}*/}
         {video && (
             <div className='flex flex-col gap-[12px]'>
-              <div ref={iframeWrapper}>
-                {video.source === 'YOUTUBE' && (
-                    <YouTube iframeClassName='w-[-webkit-fill-available] h-[404px]'
-                             videoId={video.videoId}
-                             title={video.title}
-                             ref={iframe}
-                    />
-                )}
-
-                {video.source === 'VK' && (
-                    <iframe
-                        ref={vkRef}
-                        title={video.title}
-                        src={`${video.originLink}&hd=2&autoplay=14&t=${video.startsFrom || startsForm}s&js_api=1`}
-                        width="100%"
-                        height="500px"
-                        allow="autoplay; encrypted-media; fullscreen; picture-in-picture;"
-                    ></iframe>
-                )}
-              </div>
+              <VideoCard video={video} iframeClassName='w-[100%] h-[404px]'/>
               <p className='font-open-sans font-bold text-[16px] text-dark-blue'>{video.title}</p>
 
               <div>

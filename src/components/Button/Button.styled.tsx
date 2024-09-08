@@ -30,9 +30,9 @@ export const Wrapper = styled.button<Pick<ButtonProps, 'variant' | 'width' | 'th
   ${(props) => {
     if (props.disabled) {
       return css`
-        background-color: 'transparent';
-        border-color: ${(props) => (props.theme === 'transparent' ? 'transparent' : theme.colors.white.white_10)};
-        //color: ${theme.colors.white.white_10};
+        background-color: transparent;
+        border-color: ${(props) => (props.theme === 'transparent' ? 'transparent' : theme.colors.White.white_10)};
+        //color: ${theme.colors.White.white_10};
         cursor: auto;
         & p,
         path {
@@ -44,14 +44,14 @@ export const Wrapper = styled.button<Pick<ButtonProps, 'variant' | 'width' | 'th
     switch (props.theme) {
       case 'white':
         return css`
-          //border-color: ${theme.colors.white.white_100};
-          //background-color: ${theme.colors.white.white_100};
+          //border-color: ${theme.colors.White.white_100};
+          //background-color: ${theme.colors.White.white_100};
           /* &:hover {
-               border-color: ${theme.colors.white.white_80};
-              background-color: ${theme.colors.white.white_80};
+               border-color: ${theme.colors.White.white_80};
+              background-color: ${theme.colors.White.white_80};
             } */
           &:active {
-            //background-color: ${theme.colors.white.white_80};
+            //background-color: ${theme.colors.White.white_80};
           }
           & p {
             //color: ${theme.colors.blue.blue_dark};
@@ -76,7 +76,7 @@ export const Wrapper = styled.button<Pick<ButtonProps, 'variant' | 'width' | 'th
             background-color: ${theme.colors.blue.blue_5};
           }
           & p {
-            color: ${theme.colors.white.white_100};
+            color: ${theme.colors.White.white_100};
           }
         `;
 
@@ -92,18 +92,18 @@ export const Wrapper = styled.button<Pick<ButtonProps, 'variant' | 'width' | 'th
             }
           }
           & p {
-            color: ${theme.colors.white.white_100};
+            color: ${theme.colors.White.white_100};
           }
         `;
       case 'inline':
         return css`
-          border-color: ${theme.colors.white.white_100};
+          border-color: ${theme.colors.White.white_100};
           background-color: transparent;
           &:active {
-            border-color: ${theme.colors.white.white_40};
+            border-color: ${theme.colors.White.white_40};
           }
           & p {
-            color: ${theme.colors.white.white_100};
+            color: ${theme.colors.White.white_100};
           }
         `;
 
@@ -118,7 +118,7 @@ export const Wrapper = styled.button<Pick<ButtonProps, 'variant' | 'width' | 'th
             }
           }
           & p {
-            color: ${theme.colors.white.white_100};
+            color: ${theme.colors.White.white_100};
           }
         `;
     }

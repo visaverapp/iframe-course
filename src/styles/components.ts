@@ -89,7 +89,7 @@ export const LabelText = styled.p`
   font-weight: 400;
   font-size: 17px;
   line-height: 24px;
-  color: ${theme.colors.text.white_100};
+  color: ${theme.colors.dark_blue};
 `;
 
 export const DescriptionText = styled.p`
@@ -259,10 +259,10 @@ export const PaginationWrapper = styled.div`
   margin-top: 40px;
 
   .MuiPaginationItem-root {
-    color: ${theme.colors.white.white_100};
+    color: ${theme.colors.White.white_100};
   }
   .Mui-selected {
-    color: ${theme.colors.white.white_100};
+    color: ${theme.colors.White.white_100};
     background: #17087b !important;
   }
 
@@ -276,7 +276,7 @@ export const PaginationWrapper = styled.div`
     text-align: center;
     white-space: nowrap;
 
-    color: ${theme.colors.white.white_100};
+    color: ${theme.colors.White.white_100};
   }
   @media screen and (max-width: 1024px) {
     margin-top: 30px;

@@ -1,6 +1,7 @@
 import { api } from './api';
 
-import type { GetList, Category, BaseParams } from '@/types';
+import type { GetList, BaseParams } from '@/types';
+import {Category} from "@/types/playlistTypes";
 
 const PATH = 'categories';
 

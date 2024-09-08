@@ -1,21 +1,3 @@
-///--------------------------------------///
-
-export interface AccountStat {
-  id: number;
-  name: string;
-  background_image: string;
-  description: string;
-  link: string;
-  likes_count: number;
-  views_count: number;
-  reposts_count: number;
-  comments_count: number;
-  bookmarked_count: number;
-  movie_count: number;
-}
-
-// type ListType = PersonalPlaylist | PublicPlaylist | PublicMovie | PersonalMovie | AccountStat | SearchAIMovie;
-
 export interface GetList<T> {
   count: number;
   next: null | number;
@@ -23,46 +5,25 @@ export interface GetList<T> {
   results: T[];
 }
 
-export type SharingType = 'public' | 'by_link' | 'private';
-
-export interface GetMovieInPL {
-  background_img_link: string;
-  id: number;
-  movie_id: string;
-  origin: string;
-  time: number;
+type Description = any[]
+export interface Video {
+  publicId: string;
   title: string;
+  videoId: string;
+  startsFrom: number;
+  created: string;
+  thumbnailUrl: string;
+  originLink?: string;
+  score: number;
+  description: Description[];
+  cues: Cue[];
 }
 
-export interface GetAccountUser {
-  avatar?: string | null;
-  username: string;
-  email: string;
-  publicId: string;
-  isCommercial: boolean;
-}
-export interface UpdateAccountUser {
-  avatar?: string | FileList | null;
-  // avatar?: File | FileList | null;
-  username: string;
-  email: string;
-  newPassword?: string;
-  currentPassword?: string;
-  publicId: string;
-}
-
-export interface UserPlaylistRelation {
-  is_liked?: boolean;
-  is_reposted?: boolean;
-  is_viewed?: boolean;
-  is_in_bookmarks?: boolean;
-  user?: number | string;
-  playlist?: number | string;
-  comments?: [];
-}
-
-export interface UserPlaylistRelationResponse extends Required<UserPlaylistRelation> {
-  id: number;
+export interface Cue {
+  timestampLink: string;
+  image: string;
+  durationS: number;
+  content: string;
 }
 
 export type NotificationType = {
@@ -70,3 +31,12 @@ export type NotificationType = {
   text: string;
   severity: 'error' | 'success' | undefined;
 };
+
+export interface TimecodesResponse {
+  timecodes: Timecode[];
+}
+
+export interface Timecode {
+  start: number;
+  text: string;
+}

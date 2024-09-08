@@ -1,9 +1,8 @@
 import { VideoFragmentCardProps } from './VideoFragmentCard.props';
 
-import { memo } from 'react';
 import PlayIcon from "@/components/SVGIcons/PlayIcon";
 
-const VideoFragmentCard = ({
+export const VideoFragmentCard = ({
   fragment: { content, timestampLink },
   goToTime,
 }: VideoFragmentCardProps) => {
@@ -36,5 +35,3 @@ const VideoFragmentCard = ({
     </div>
   );
 };
-
-export default memo(VideoFragmentCard);

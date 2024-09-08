@@ -1,5 +1,25 @@
 export const theme = {
   colors: {
+    dark_blue: '#1F2D3D',
+    black: '#161818',
+    indigo: '#273444',
+    white: '#FFFFFF',
+    green_active: '#00B856',
+    white_hover: '#F4F4F4',
+    white_active: '#D3DCE6',
+    milk_white: '#E5E9F2',
+    lite_green: '#009E5A',
+    green_hover: '#2EDB8A',
+    green_disabled: '#50AE7C',
+    dark_gray: '#3C4858',
+    light_gray: '#8492A6',
+    gray: '#494952',
+    white_disabled: '#E5E9F2',
+    white_default: '#ACB5B8',
+    gray_default: '#8391A5',
+    lite_gray: '#D1DBE5',
+    gray_hover: '#E7EBEF',
+
     text: {
       white_100: '#E4E4FF',
       white_80: '#BBB6DA',
@@ -8,10 +28,9 @@ export const theme = {
       white_10: '#3E2C69',
       blue_25: '#17087B',
     },
-    white: {
+    White: {
       white_100: '#E4E4FF',
       white_80: '#BBB6DA',
-      white_70: '#A8ABEA',
       white_40: '#685FA7',
       white_30: '#62548B',
       white_10: '#2B1759',
@@ -29,10 +48,6 @@ export const theme = {
     red: {
       red_light: '#EF7A80',
       red_dark: ' #EA525A',
-    },
-    green: {
-      green_light: '#7AEF8D',
-      green_dark: '#2B7838',
     },
     label: {
       label_light: '#E4E4FF',

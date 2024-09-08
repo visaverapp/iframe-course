@@ -1,14 +1,14 @@
 import {Route, Routes} from "react-router-dom";
-import {MainPage} from "@/pages/MainPage/MainPage";
-import {VideoPage} from "@/pages/VideoPage/VideoPage";
-import {Layout} from "@/components/Layout/Layout";
+import {VideoLayout} from "@/layouts/VideoLayout/VideoLayout";
+import {SearchLayout} from "@/layouts/SearchLayout/SearchLayout";
+import {SearchResultPage} from "@/pages/SearchResultPage/SearchResultPage";
 
 const App = () => {
   return (
       <Routes>
-        <Route path="/" element={<Layout/>}>
-          <Route index element={<MainPage/>}/>
-          <Route path="/video" element={<VideoPage />}/>
+        <Route path="/" element={<VideoLayout/>} />
+        <Route path="search" element={<SearchLayout />}>
+          <Route index element={<SearchResultPage />} />
         </Route>
       </Routes>
   );

@@ -1,21 +1,20 @@
 import { api } from './api';
 
 import type {
-  Playlist,
   GetList,
-  CreatePlaylistType,
-  PartialUpdatePlaylist,
   BaseParams,
   PlaylistParams,
-  VideoWithFragments,
-  Timecode,
-  TimecodesResponse,
-  TimecodesRequest,
-  SummaryResponse,
-  SuggestVideoType,
   QuizApiResponse,
 } from '@/types';
 import {getSearchParamFromURL} from "@/utils/getSearchParamFromURL";
+import {
+  CreatePlaylistType,
+  PartialUpdatePlaylist,
+  Playlist, SummaryResponse,
+  TimecodesRequest,
+  VideoWithFragments
+} from "@/types/playlistTypes";
+import {SuggestVideoType} from "@/types/videosTypes";
 
 
 const path = 'playlists';
@@ -177,19 +176,19 @@ export const playlistsAPI = api.injectEndpoints({
       },
     }),
 //таймкоды
-    getTimecodes: build.query<Timecode[], TimecodesRequest>({
-      query: ({ playlistId, videoPublicId }) => ({
-        url: `${path}/${playlistId}/videos/${videoPublicId}/timecodes/`,
-        method: 'GET',
-      }),
-      transformResponse: (response: TimecodesResponse) =>
-          response.results[0].data.timecodes
-              .filter((obj, index) => {
-                return index === response.results[0].data.timecodes.findIndex((t) => t.start === obj.start || t.text === obj.text);
-              })
-              .map((timecode) => ({ ...timecode, startOffsetMs: Math.round(timecode.start) }))
-              .sort((a, b) => a.startOffsetMs - b.startOffsetMs),
-    }),
+//     getTimecodes: build.query<Timecode[], TimecodesRequest>({
+//       query: ({ playlistId, videoPublicId }) => ({
+//         url: `${path}/${playlistId}/videos/${videoPublicId}/timecodes/`,
+//         method: 'GET',
+//       }),
+//       transformResponse: (response: TimecodesResponse) =>
+//           response.results[0].data.timecodes
+//               .filter((obj, index) => {
+//                 return index === response.results[0].data.timecodes.findIndex((t) => t.start === obj.start || t.text === obj.text);
+//               })
+//               .map((timecode) => ({ ...timecode, startOffsetMs: Math.round(timecode.start) }))
+//               .sort((a, b) => a.startOffsetMs - b.startOffsetMs),
+//     }),
     getDocs: build.query<string, TimecodesRequest>({
       query: ({ playlistId, videoPublicId }) => ({
         url: `${path}/${playlistId}/videos/${videoPublicId}/summaries/`,
