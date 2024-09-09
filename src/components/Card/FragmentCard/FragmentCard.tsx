@@ -6,7 +6,7 @@ export const FragmentCard = memo(({ background_image, content = '' }: FragmentCa
   return (
     <FragmentCardStyled>
       <VideoImageWrapper background_image={background_image} />
-      <Time>00:05:14 Пример: анализ рынка доставки пиццы</Time>
+      <Time><span className='font-bold font-open-sans text-[16px] text-[#6F42C1]'>00:05:14</span> Пример: анализ рынка доставки пиццы</Time>
       <Description dangerouslySetInnerHTML={{ __html: content.slice(0, 55) + '...' }} />
     </FragmentCardStyled>
   );

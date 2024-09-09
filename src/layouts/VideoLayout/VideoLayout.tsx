@@ -1,11 +1,9 @@
-import {Summary} from "@/pages/Summary/Summary";
-import {VideoPage} from "@/pages/VideoPage/VideoPage";
+import {Video} from "@/pages/ReezOnly/Video/Video";
 
 export const VideoLayout = () => {
   return (
       <div className='flex gap-[14px]'>
-        <VideoPage/>
-        <Summary />
+        <Video/>
       </div>
   );
 };

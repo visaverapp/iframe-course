@@ -9,10 +9,11 @@ export const FragmentCardStyled = styled.div`
     height: 224px;
     overflow: hidden;
     display: flex;
+    padding: 8px;
     flex-direction: column;
     gap: 8px;
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: #E6E6EA;
 `;
 
 export const VideoTime = styled.div`
@@ -50,7 +51,7 @@ export const Time = styled(LabelText)`
     color: rgb(22, 24, 24);
     font-family: "Open Sans",sans-serif;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 140%;
     text-align: left;
 `;

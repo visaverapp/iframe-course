@@ -907,25 +907,25 @@ export const SearchResultPage = () => {
 
 
   return (
-        <div className='pt-[12px]'>
-          <div>
-            <div className='absolute left-[21%] top-[11%]'>
-              <Toggle title='Искать по точному совпадению' checked={isChecked} onChange={() => {
-              }}/>
-            </div>
-            <Tabs activeTab={activeTab} onChange={(index: number)=>setActiveTab(index)}/>
+      <div>
+        <div>
+          <div className='absolute left-[4%] top-[16%]'>
+            <Toggle title='Искать по точному совпадению' checked={isChecked} onChange={() => {
+            }}/>
           </div>
-          <div className='relative flex flex-col h-[640px] scroll-bar overflow-y-scroll'>
-            {activeTab === 0 ?
-                <div>
-                  <SearchVideoCard video={video} />
-                  <ResultVideoInnerWithScreenShot videos={dataVideos}/>
-                </div>
-                :
-                activeTab === 1 ? <ResultVideoInnerWithScreenShot videos={dataVideos}/>
-                    : activeTab === 2 ? <SearchVideoCard video={video} /> : <></> }
-          </div>
+          <Tabs activeTab={activeTab} onChange={(index: number) => setActiveTab(index)}/>
         </div>
+        <div className='relative flex flex-col h-[412px] scroll-bar overflow-y-scroll'>
+          {activeTab === 0 ?
+              <div>
+                <SearchVideoCard video={video}/>
+                <ResultVideoInnerWithScreenShot videos={dataVideos}/>
+              </div>
+              :
+              activeTab === 1 ? <ResultVideoInnerWithScreenShot videos={dataVideos}/>
+                  : activeTab === 2 ? <SearchVideoCard video={video}/> : <></>}
+        </div>
+      </div>
   );
 };
 

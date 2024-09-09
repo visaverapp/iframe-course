@@ -53,8 +53,8 @@ export const SearchVideoCardWithScreenShot = ({ videoInfo }: SearchVideoCardProp
         </Header>
         <Main>
           <Title>{title}</Title>
-          <p className='mb-[10px] font-open-sans font-normal text-indigo text-[14px]'>Рассматриваем популярные и полезные сервисы для исследований, в которых вам не нужно никого опрашивать, ни за кем наблюдать и ни над кем экспериментировать.</p>
-          <p className='mb-[10px] font-normal font-open-sans text-[#A2A2A9] text-[16px]'>Подходящие фрагменты: 5</p>
+          <p className='mb-[10px] font-open-sans font-normal text-[#696977] text-[14px]'>Рассматриваем популярные и полезные сервисы для исследований, в которых вам не нужно никого опрашивать, ни за кем наблюдать и ни над кем экспериментировать.</p>
+          <p className='mb-[10px] font-bold font-open-sans text-[#000000] text-[16px]'>Подходящие фрагменты: 5</p>
           <InnerSlider items={videoInfo} />
         </Main>
       </SearchVideoCardStyled>

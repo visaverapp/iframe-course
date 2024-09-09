@@ -34,13 +34,13 @@ export const Inner = styled.div`
 `;
 
 export const SearchVideoCardStyled = styled.div`
-    width: 1312px;
+    width: 990px;
     height: 386px;
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #EDEFF3;
+    padding: 15px;
     display: flex;
-    gap: 32px;
-    margin-left: 14px;
+    gap: 20px;
     flex-direction: row;
     background-color: ${theme.colors.white};
     margin-bottom: 12px;
@@ -85,7 +85,7 @@ export const Title = styled(DescriptionText)`
     text-overflow: ellipsis; /* Добавляем многоточие */
     hyphens: manual;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 700;
     text-align: left;
     color: #1F2D3D;
     padding-bottom: 6px;
@@ -101,7 +101,7 @@ export const Title = styled(DescriptionText)`
 export const Main = styled.div`
   border-radius: 0px 0px 10px 10px;
   background: #ffffff;
-  width: 100%;
+  //width: 100%;
   /*max-width: 910px;
   padding: 40px 0; */
 `;

@@ -58,21 +58,21 @@ export const Question = ({ answers, correctAnswer, currentAnswer, question, goTo
         <div className='flex pt-[16px] justify-between'>
           <div>
           {currentAnswer && correctAnswer !== currentAnswer && (
-              <button className='rounded-[10px] px-[18px] py-[6px] font-open-sans text-[14px] font-normal bg-dark-blue text-white-hover' onClick={() => goToTime(start)}>
+              <button className='rounded-[10px] px-[18px] py-[6px] font-open-sans text-[14px] font-normal bg-white text-[#514DF7] border-[1px] border-[#514DF7]' onClick={() => goToTime(start)}>
                 Смотреть фрагмент с ответом
               </button>
           )}
           </div>
           <div className='flex gap-[12px]'>
-          <button className={`${!activeQuestionIndex ? 'bg-milk-white' : 'bg-indigo'} px-[30px] py-[4px] rounded-[8px]`}
+          <button className={`${!activeQuestionIndex ? 'bg-[#514DF7] bg-opacity-65' : 'bg-[#514DF7]'} px-[30px] py-[4px] rounded-[8px]`}
                   onClick={() => {
                     setActiveQuestionIndex(activeQuestionIndex - 1);
                   }}
               disabled={!activeQuestionIndex}
           >
-            <ArrowLeft stroke={`${activeQuestionIndex ? '#FFFFFF' : '#8492A6'}`}/>
+            <ArrowLeft stroke={`${activeQuestionIndex ? '#FFFFFF' : '#FFFFFF'}`}/>
           </button>
-          <button className={'bg-indigo px-[30px] py-[4px] rounded-[8px]'}
+          <button className={'bg-[#514DF7] px-[30px] py-[4px] rounded-[8px]'}
                   onClick={onNextButtonHandler}
               // disabled={isLastQuestion}
           >

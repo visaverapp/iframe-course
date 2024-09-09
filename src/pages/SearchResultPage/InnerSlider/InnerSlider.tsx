@@ -104,7 +104,7 @@ const InnerSlider = ({ items }: InnerSliderProps) => {
         {items.cues.map(({ content }, i) => (
           <div key={i}>
             <Slide index={i}>
-              <StyledLink to={'/'}>
+              <StyledLink to={'/'} state={{ fromSearch: true }}>
                 <FragmentCard
                   background_image='https://probusiness.visaver.online/frames/video_DmuB41GNl5U/00121.jpg'
                   // timeStamp={secondsToTime(parseInt(timestampLink))}

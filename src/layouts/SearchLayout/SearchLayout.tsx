@@ -1,6 +1,6 @@
-import {ButtonPrevResult} from "@/components/ButtonPrevResult/ButtonPrevResult";
 import {SearchInput} from "@/components/SearchInput/SearchInput";
 import {SearchResultPage} from "@/pages/SearchResultPage/SearchResultPage";
+import backIcon from '../../components/SVGIcons/BackIcon.svg'
 
 const suggestions = [
   "Оценка рыночного потенциала с методом TAM-SAM-SOM и анализ конкурентов для привлечения инвестиций",
@@ -44,13 +44,18 @@ const suggestions = [
 ]
 export const SearchLayout = () => {
   return (
-      <div className='w-[1340px]'>
-        <div className='pl-[14px] bg-white py-[12px] border-b-[1px] border-white-active flex gap-[81px]'>
-          <ButtonPrevResult />
-          <SearchInput suggestionsList={suggestions}/>
-        </div>
-        <div className='bg-white-hover'>
-        <SearchResultPage />
+      <div className='w-[100vw] h-[100vh] bg-white-hover'>
+        <div className='fixed left-[20%] top-[-4%] mt-[10%]'>
+          <div className='flex flex-col gap-[14px] w-[1080px] h-[600px] bg-white p-[40px] mx-auto rounded-[15px]'>
+            <div className='flex gap-[5px]'>
+              <button
+                  className='hover:bg-white-hover pl-3 w-[45px] h-[40px] rounded-[9px] border-[#EDEFF3] border-[1px]'>
+                <img src={backIcon} alt="backIcon"/>
+              </button>
+              <SearchInput suggestionsList={suggestions}/>
+            </div>
+            <SearchResultPage/>
+          </div>
         </div>
       </div>
   );

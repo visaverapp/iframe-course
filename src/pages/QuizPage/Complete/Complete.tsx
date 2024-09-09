@@ -1,6 +1,6 @@
 import {useAppSelector} from "@/hooks/useStore";
 import {useActions} from "@/hooks/useActions";
-import completedIcon from './images/completed.svg'
+import resultQuiz from '../../../components/SVGIcons/resultQuiz.svg'
 
 
 export const Complete = () => {
@@ -23,25 +23,27 @@ export const Complete = () => {
   };
 
   return (
-    <div className='flex justify-between'>
+    <div className='flex gap-[100px]'>
       <div>
-        <img src={completedIcon} alt="icon"/>
+        <img src={resultQuiz} alt="icon"/>
       </div>
       <div>
+      <div className='flex flex-col items-center '>
         <span className='text-right block pb-[4px] font-open-sans text-[16px] font-normal text-black'>Ваш результат</span>
         {/*{correctCount === questionsCount && <span className='text-right block pb-[4px] font-open-sans text-[16px] font-normal text-black'>Ваш результат</span>}*/}
         <span className='block pb-[16px] font-open-sans text-[16px] font-bold text-black'>{setText()}</span>
 
-        <div className='flex justify-end'>
+        <div className='flex justify-center'>
           <button
             onClick={() => {
               setQuizRestart();
             }}
-            className='w-[152px] h-[40px] font-open-sans text-[15px] font-bold text-white bg-indigo rounded-[10px]'
+            className='w-[152px] h-[40px] font-open-sans text-[15px] font-bold text-white bg-[#514DF7] rounded-[10px]'
           >
             Пройти заново
           </button>
         </div>
+      </div>
       </div>
     </div>
   );

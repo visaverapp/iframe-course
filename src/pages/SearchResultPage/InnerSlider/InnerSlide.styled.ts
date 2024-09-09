@@ -2,8 +2,8 @@ import Slider from 'react-slick';
 import styled from 'styled-components';
 
 export const SliderContainer = styled.div`
-  background: #ffffff;
-  max-width: 910px;
+  background: #E6E6EA;
+  max-width: 618px;
   //padding: 40px 0;
 
   //@media screen and (max-width: 1280px) {
@@ -16,7 +16,6 @@ export const SliderContainer = styled.div`
 
 export const Slide = styled.div<{ index: number }>`
    //padding-left: ${(props) => (props.index === 0 ? '40px' : '20px')};
-    padding-right: 20px;
 
   //@media screen and (max-width: 768px) {
   //  padding-left: 20px;

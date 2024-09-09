@@ -14,7 +14,7 @@ export const Tabs = ({activeTab, onChange}: TabsPropsType) => {
                   key={index}
                   className={`${
                       activeTab === index
-                          ? 'bg-green-active font-bold text-white'
+                          ? 'bg-[#514DF7] font-bold text-white'
                           : 'bg-white font-normal text-dark-blue'
                   } cursor-pointer block pt-[10px] font-open-sans rounded-[12px] text-center w-[170px] h-[40px] text-[14px]`}
                   onClick={() => onChange(index)}

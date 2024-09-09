@@ -26,8 +26,8 @@ export const SuggestionsWrapper = styled.div`
 `;
 
 export const SuggestionSearchWrapper = styled(SuggestionsWrapper)`
-    top: 80px;
-    width: 708px;
+    top: 87px;
+    width: 945px;
 `;
 
 

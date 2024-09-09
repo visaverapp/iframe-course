@@ -53,23 +53,23 @@ export const Timecodes = memo(() => {
 
   return (
       <div
-          className='h-[293px] scroll-bar overflow-y-scroll w-[712px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]'>
+          className='h-[469px] scroll-bar overflow-y-scroll w-[546px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]'>
         {data && (
             <ol>
               {data.map(({start, text, title}, i) => (
                   <li onClick={() => toggleText(i)}
                       className='cursor-pointer rounded-[12px] pb-[8px] pr-[8px]' key={i}>
                     <div>
-                      <span className='text-lite-green font-open-sans font-bold text-[14px] pr-[5px]'>{start}</span>
+                      <span className='text-[#6F42C1] font-open-sans font-bold text-[14px] pr-[5px]'>{start}</span>
                       <span className='text-dark-blue font-open-sans font-bold text-[14px]'>{title}</span>
                     </div>
-                    <div className='flex w-[670px] justify-between'>
+                    <div className='flex justify-between'>
                       <span
                           className='text-indigo font-open-sans font-normal text-[14px]'>
-                        {showTextIndex === i ? text : text.slice(0, 85) + '...'}
+                        {showTextIndex === i ? text : text.slice(0, 59) + '...'}
                       </span>
                       <span
-                          className='self-end cursor-pointer text-green-hover font-open-sans font-normal text-[14px]'>
+                          className='self-end cursor-pointer text-[#6F42C1] font-open-sans font-normal text-[14px]'>
                         {showTextIndex === i ? 'Свернуть' : '...ещё'}
                       </span>
                     </div>
@@ -78,7 +78,7 @@ export const Timecodes = memo(() => {
             </ol>
         )}
         <div className='flex justify-end'>
-          <span className='cursor-pointer text-green-hover font-open-sans font-normal text-[14px]' onClick={onReadMoreClick}>
+          <span className='cursor-pointer text-[#6F42C1] font-open-sans font-normal text-[14px]' onClick={onReadMoreClick}>
             {isCollapsed ? 'Развернуть' : 'Свернуть'}
           </span>
         </div>

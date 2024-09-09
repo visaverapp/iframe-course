@@ -129,7 +129,7 @@ export const SearchInput = ({suggestionsList}: { suggestionsList: string[] }) =>
   };
 
   return (
-      <div className='flex flex-col justify-center items-center gap-[48px]' ref={wrapperRef}>
+      <div className='flex flex-col items-center' ref={wrapperRef}>
         <div className='relative'>
         <input
             type="text"
@@ -139,9 +139,9 @@ export const SearchInput = ({suggestionsList}: { suggestionsList: string[] }) =>
             onFocus={() => setOpen(true)}
             defaultValue={params.get('search') ?? ''}
             placeholder='Какие слова ищем в этом курсе?'
-            className='w-[706px] h-[52px] focus:outline-none focus:border-light-gray self-end pl-[16px] pr-[45px] pt-[7px] pb-[10px] border-white-active border-[1px] rounded-[12px] text-[16px] text-dark-blue'
+            className='w-[945px] h-[40px] focus:outline-none focus:border-light-gray self-end pl-[16px] pr-[45px] pt-[7px] pb-[10px] border-[#EDEFF3] border-[1px] rounded-[9px] text-[16px] text-dark-blue'
         />
-          <div className='absolute right-[2%] top-[29%]'>
+          <div className='absolute right-[2%] top-[20%]'>
             <SearchIcon/>
           </div>
         </div>

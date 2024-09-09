@@ -11,7 +11,7 @@ export const Toggle: FC<ToggleProps> = ({ onChange, title = '' }) => {
       <label htmlFor="toogleA" className="flex items-center cursor-pointer">
         <div className="relative">
           <input id="toogleA" type="checkbox" className="sr-only" onChange={onChange} />
-          <div className="key w-[40px] h-[16px] bg-lite-gray rounded-full"></div>
+          <div className="key w-[40px] h-[16px] bg-white-disabled rounded-full"></div>
           <div className="dot absolute w-[16px] h-[12px] bg-white rounded-full left-[4px] top-[2px] transition"></div>
         </div>
         <div className="ml-3 font-open-sans font-normal text-[12px] text-dark-blue">{title}</div>
@@ -23,7 +23,7 @@ export const Toggle: FC<ToggleProps> = ({ onChange, title = '' }) => {
         background-color: #FFFFFF;
       }
       input:checked ~ .key {
-        background-color: #00B856;
+        background-color: #514DF7;
       }`}
       </style>
     </Fragment>
