@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import SearchIcon from "../../../components/SVGIcons/SearchIcon";
-import backIconWhite from "@/components/SVGIcons/backIconWhite.svg";
+import backIconWhite from "../../../components/SVGIcons/BackIconWhite.svg";
 import {useNavigate, useLocation} from "react-router-dom";
 
 type InputSearchTimecodesPropsType = {
