@@ -19,7 +19,7 @@ const video = {
   ]
 }
 export const Video = () => {
-  const [isActiveInput, setIsActiveInput] = useState(false)
+  const [ ,setIsActiveInput] = useState(false)
 
   const onChange = (value: boolean) => {
     setIsActiveInput(value)

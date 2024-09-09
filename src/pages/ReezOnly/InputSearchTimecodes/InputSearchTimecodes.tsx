@@ -9,7 +9,7 @@ type InputSearchTimecodesPropsType = {
 
 export const InputSearchTimecodes = ({onChange}: InputSearchTimecodesPropsType) => {
   const [inputValue, setInputValue] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
+  const [, setIsFocused] = useState(false);
   const [showBackButton, setShowBackButton] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -41,10 +41,10 @@ export const InputSearchTimecodes = ({onChange}: InputSearchTimecodesPropsType) 
     onChange(false)
   };
 
-  const clearInput = () => {
-    setInputValue('');
-    setIsFocused(false);
-  };
+  // const clearInput = () => {
+  //   setInputValue('');
+  //   setIsFocused(false);
+  // };
 
   return (
       <div className='flex gap-[10px] w-[546px] h-[40px]'>
