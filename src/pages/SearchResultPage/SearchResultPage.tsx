@@ -6,11 +6,10 @@ import {
 } from "@/pages/Search/components/ResultVideoInnerWithScreenShot/ResultVideoInnerWithScreenShot";
 import {SearchVideoCard} from "@/pages/SearchResultPage/SearchVideoCard";
 import {playlistsAPI} from "@/api";
-import {useDebounce} from "@/hooks/useDebounce";
 import {useSearchParams} from "react-router-dom";
 
 export const SearchResultPage = () => {
-  const [params, setParams] = useSearchParams();
+  const [params] = useSearchParams();
   const [isChecked] = useState(false)
   const [activeTab, setActiveTab] = useState(0);
   const search = useRef<HTMLInputElement | null>(null);
@@ -20,19 +19,14 @@ export const SearchResultPage = () => {
   const videos = playlists?.results[0].videos
   console.log(videos)
 
-  const makeSearch = useDebounce(() => {
-    const data = search.current?.value || '';
-    if (data) {
-      setParams({search: data});
-    } else {
-      setParams({});
-    }
-  }, 500);
-
-  const onSearch = () => {
-    makeSearch();
-  };
-
+  // const makeSearch = useDebounce(() => {
+  //   const data = search.current?.value || '';
+  //   if (data) {
+  //     setParams({search: data});
+  //   } else {
+  //     setParams({});
+  //   }
+  // }, 500);
 
   return (
       <div className='pt-[12px]'>

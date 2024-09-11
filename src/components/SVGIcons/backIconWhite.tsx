@@ -1,5 +1,3 @@
-import React from 'react';
-
 const BackIconWhite = () => {
   return (
       <svg width="18" height="28" viewBox="0 0 18 28" fill="none" xmlns="http://www.w3.org/2000/svg">

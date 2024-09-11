@@ -1,9 +1,9 @@
-import { api } from './api';
+import {api} from './api';
 
-import { getSearchParamFromURL } from '@/utils/getSearchParamFromURL';
+import {getSearchParamFromURL} from '@/utils/getSearchParamFromURL';
 
-import type { GetList, BaseParams, Video, VideoParams } from '@/types';
-import {CreateVideoType, SearchAIMovie} from "@/types/videosTypes";
+import type {BaseParams, GetList, Video, VideoParams} from '@/types';
+import {SearchAIMovie} from "@/types/videosTypes";
 
 const PATH = 'videos';
 

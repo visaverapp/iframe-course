@@ -1,6 +1,4 @@
-import { VideoFragmentCardProps } from './VideoFragmentCard.props';
-
-import PlayIcon from "@/components/SVGIcons/PlayIcon";
+import {VideoFragmentCardProps} from './VideoFragmentCard.props';
 import {secondsToTime} from "@/pages/Search/utils";
 
 export const VideoFragmentCard = ({

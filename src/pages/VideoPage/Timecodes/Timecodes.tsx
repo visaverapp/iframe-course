@@ -9,7 +9,7 @@ interface TimecodesProps {
   currentTime: number | null;
 }
 
-export const Timecodes = memo(({ setTime, playlistId, id, currentTime }: TimecodesProps) => {
+export const Timecodes = memo(({ setTime, playlistId, id }: TimecodesProps) => {
   const [showTextIndex, setShowTextIndex] = useState(null)
   // const [isCollapsed, setIsCollapsed] = useState(false)
 

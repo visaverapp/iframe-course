@@ -1,9 +1,8 @@
 import {useRef} from "react";
 import YouTube from "react-youtube";
-import {Video} from "@/types/videosTypes";
 
 interface VideoCardProps {
-  video: Video
+  video: any
   iframeClassName: string
 }
 

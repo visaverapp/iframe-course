@@ -1,4 +1,3 @@
-import {VideoWithFragments} from "@/types";
 import {
   Header,
   HeaderContent,
@@ -9,6 +8,7 @@ import {
 import InnerSlider from "@/pages/SearchResultPage/InnerSlider/InnerSlider";
 import StyledLink from "@/components/StyledLink/StyledLink";
 import {VideoCard} from "@/components/VideoCard/VideoCard";
+import {VideoWithFragments} from "@/types/playlistTypes";
 
 interface SearchVideoCardProps {
   videoInfo: VideoWithFragments;

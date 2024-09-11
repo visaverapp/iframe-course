@@ -1,16 +1,14 @@
 import {useSearchParams} from "react-router-dom";
 import {useRef, useState} from "react";
-import {LabelText} from "@/styles";
 import SearchIcon from "@/components/SVGIcons/SearchIcon";
-import {SuggestionSearchWrapper, SuggestionsItem, SuggestionsList} from "@/components/SearchInput/SearchInputStyle";
 import {useDebounce} from "@/hooks/useDebounce";
 import {playlistsAPI} from "@/api";
 
 export const SearchInput = () => {
 
   const [params, setParams] = useSearchParams();
-  const [isChecked] = useState(false)
-  const [activeTab, setActiveTab] = useState(0);
+  const [] = useState(false)
+  // const [activeTab, setActiveTab] = useState(0);
   const search = useRef<HTMLInputElement | null>(null);
 
   // const {data, isFetching, isLoading, isSuccess} = videosAPI.useGetMyVideosQuery({});

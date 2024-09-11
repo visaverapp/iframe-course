@@ -1,7 +1,5 @@
 import {useCallback, useRef, useState} from "react";
-import {
-  SearchInVideoInput
-} from "@/components/SearchTimecodesVideoInput/SearchInVideoInput";
+import {SearchInVideoInput} from "@/components/SearchTimecodesVideoInput/SearchInVideoInput";
 import {Timecodes} from "@/pages/VideoPage/Timecodes/Timecodes";
 import QuizPage from "@/pages/QuizPage/QuizPage";
 import {DescriptionTextVideo} from "@/pages/VideoPage/DescriptionTextVideo/DescriptionTextVideo";
@@ -11,33 +9,14 @@ import YouTube from "react-youtube";
 import {playlistsAPI, videosAPI} from "@/api";
 import {VideoFragmentCard} from "@/components/Card/VideoFragmentCard";
 
-
-const video = {
-  "publicId": "c2bf1bff-13ec-4090-aa56-c50b5eb364da",
-  "title": "Система. ПРО бизнес.",
-  "videoId": "DmuB41GNl5U",
-  "source": "YOUTUBE",
-  "originLink": "https://www.youtube.com/watch?v=DmuB41GNl5U",
-  "startsFrom": 0,
-  "description": "Анализ. Когда и зачем анализировать рынок.",
-  "thumbnailUrl": "https://i.ytimg.com/vi/DmuB41GNl5U/sddefault.jpg",
-  "purpose": "PERSONAL",
-  "quizIds": [
-    "ac4f2bcd-6451-4eb0-828e-507ce3b2b181"
-  ]
-}
-
-// const searchVideos = []
-
-
 export const VideoPage = () => {
   const [tab, setTab] = useState(1)
-  const [isActiveInput, setIsActiveInput] = useState(false)
-  const [currentTime, setCurrentTime] = useState(null);
+  const [isActiveInput] = useState(false)
+  const [currentTime] = useState(null);
   const iframe = useRef<YouTube>(null);
   const iframeWrapper = useRef<HTMLDivElement>(null);
   const vkRef = useRef<HTMLIFrameElement>(null);
-  const [param, setParam] = useSearchParams();
+  const [param] = useSearchParams();
   const playlistId = "59609dd8-7ef4-4080-9cb8-3c2cab266494"
   const videoId = "5ec5bb33-9c1e-4295-8a82-ca36138da3cb"
 
@@ -45,7 +24,7 @@ export const VideoPage = () => {
     data: video,
   } = videosAPI.useGetMovieByIdQuery({ id: videoId  ?? '' });
 
-  const [getSearchVideos, { data: searchVideos, isLoading: isSearchLoading, error: searchError }] =
+  const [getSearchVideos, { data: searchVideos }] =
       playlistsAPI.useLazyGetFullSearchQuery();  //получили все видео плейлиста
 
   const getSearchVideosHandler = useCallback(
