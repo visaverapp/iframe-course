@@ -27,10 +27,10 @@ export const playlistsAPI = api.injectEndpoints({
         params,
       }),
       extraOptions: { maxRetries: 8 },
-      transformErrorResponse: (error) => {
-        console.log(error);
-        return { status: error.status };
-      },
+      // transformErrorResponse: (error) => {
+      //   console.log(error);
+      //   return { status: error.status };
+      // },
       providesTags: (result) =>
           result
               ? [

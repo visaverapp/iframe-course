@@ -1,10 +1,9 @@
-import {Video} from "@/types/videosTypes";
 import {VideoCard} from "@/components/VideoCard/VideoCard";
 import {useGetMovieByIdQuery} from "@/api";
 
 
 interface SearchVideoCardProps {
-  video: Video
+  video: any
 }
 
 export const SearchVideoCard = ({video}: SearchVideoCardProps) => {

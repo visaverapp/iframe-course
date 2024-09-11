@@ -1,10 +1,9 @@
 import {useMemo, useRef} from "react";
-import YouTube, {YouTubeEvent, YouTubeProps} from "react-youtube";
+import YouTube, {YouTubeProps} from "react-youtube";
 import {useSearchParams} from "react-router-dom";
-import {Video} from "@/types";
 
 interface VideoCardProps {
-  video: Video
+  video: any
   iframeClassName: string
   setCurrentTime?: (time: number | null) =>void
 }
@@ -20,12 +19,12 @@ export const VideoCard = ({video, iframeClassName}:VideoCardProps) => {
     return time ? parseInt(time) : 0;
   }, [params]);
 
-  const getCurrentTimeFunc = async () => {
+  // const getCurrentTimeFunc = async () => {
   //   setCurrentTime((await iframe.current?.internalPlayer.getCurrentTime()) || 0);
-  };
+  // };
 
   // let timerId: number;
-  const onStateChange: YouTubeProps['onStateChange'] = (event) => {
+  const onStateChange: YouTubeProps['onStateChange'] = () => {
   //   if (event.data === 1) {
   //     timerId = setInterval(() => {
   //       getCurrentTimeFunc();
@@ -35,10 +34,10 @@ export const VideoCard = ({video, iframeClassName}:VideoCardProps) => {
   //   }
   };
 
-  const goToTimeFunc = async (event: YouTubeEvent) => {
-    await event.target.seekTo(params.get('t') ?? 0, true);
-    await event.target.playVideo();
-  };
+  // const goToTimeFunc = async (event: YouTubeEvent) => {
+  //   await event.target.seekTo(params.get('t') ?? 0, true);
+  //   await event.target.playVideo();
+  // };
 
 
   return (

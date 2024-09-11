@@ -1,7 +1,7 @@
 import { Slide, SliderContainer, SliderStyled } from './InnerSlide.styled';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import {Video, VideoWithFragments} from '@/types';
+import {VideoWithFragments} from '@/types';
 import StyledLink from "@/components/StyledLink/StyledLink";
 import {FragmentCard} from "@/components/Card/FragmentCard/FragmentCard";
 import {ArrowButton} from "@/components/Button/ArrowButton/ArrowButton";

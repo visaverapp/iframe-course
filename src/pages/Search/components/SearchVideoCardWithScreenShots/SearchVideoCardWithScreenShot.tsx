@@ -1,12 +1,14 @@
-import {Video, VideoWithFragments} from "@/types";
+import {VideoWithFragments} from "@/types";
 import {
-  Header, HeaderContent, Main,
-  SearchVideoCardStyled, Title,
+  Header,
+  HeaderContent,
+  Main,
+  SearchVideoCardStyled,
+  Title,
 } from "@/pages/Search/components/SearchVideoCardWithScreenShots/SearchVideoCardWithScreenShot.styled";
 import InnerSlider from "@/pages/SearchResultPage/InnerSlider/InnerSlider";
 import StyledLink from "@/components/StyledLink/StyledLink";
 import {VideoCard} from "@/components/VideoCard/VideoCard";
-import {playlistsAPI} from "@/api";
 
 interface SearchVideoCardProps {
   videoInfo: VideoWithFragments;

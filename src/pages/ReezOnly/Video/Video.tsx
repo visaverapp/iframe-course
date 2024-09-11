@@ -1,6 +1,6 @@
 import {VideoCard} from "@/components/VideoCard/VideoCard";
 import {Summary} from "@/pages/Summary/Summary";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useCallback, useRef, useState} from "react";
 import {InputSearchTimecodes} from "@/pages/ReezOnly/InputSearchTimecodes/InputSearchTimecodes";
 import {playlistsAPI, videosAPI} from "@/api";
 import YouTube from "react-youtube";
@@ -9,11 +9,11 @@ import {VideoFragmentCard} from "@/components/Card/VideoFragmentCard";
 import {useSearchParams} from "react-router-dom";
 
 export const Video = () => {
-  const [currentTime, setCurrentTime] = useState(null);
+  const [currentTime] = useState(null);
   const iframe = useRef<YouTube>(null);
   const iframeWrapper = useRef<HTMLDivElement>(null);
   const vkRef = useRef<HTMLIFrameElement>(null);
-  const [param, setParam] = useSearchParams();
+  const [param] = useSearchParams();
   const playlistId = "59609dd8-7ef4-4080-9cb8-3c2cab266494"
   const videoId = "5ec5bb33-9c1e-4295-8a82-ca36138da3cb"
   // const [filteredTimecodes, setFilteredTimecodes] = useState([]);
@@ -23,7 +23,7 @@ export const Video = () => {
     data: video,
   } = videosAPI.useGetMovieByIdQuery({ id: videoId  ?? '' });
 
-  const [getSearchVideos, { data: searchVideos, isLoading: isSearchLoading, error: searchError }] =
+  const [getSearchVideos, { data: searchVideos}] =
       playlistsAPI.useLazyGetFullSearchQuery();  //получили все видео плейлиста
 
 

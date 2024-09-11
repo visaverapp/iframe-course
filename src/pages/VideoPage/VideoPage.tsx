@@ -90,7 +90,7 @@ export const VideoPage = () => {
                     </>
                 )}
               </div>
-              {tab === 1 ? <Timecodes/> :
+              {tab === 1 ? <Timecodes setTime={()=>{}} id={''} currentTime={0} playlistId={''}/> :
                   tab === 2 ? <DescriptionTextVideo />
                       : tab === 3 ? <QuizPage></QuizPage> : <></> }
 
