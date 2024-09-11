@@ -1,9 +1,6 @@
-import { api } from './api';
-
-import { getSearchParamFromURL } from '@/utils/getSearchParamFromURL';
-
-import type { GetList, BaseParams, Video, VideoParams } from '@/types';
-import {CreateVideoType, SearchAIMovie} from "@/types/videosTypes";
+import {api} from "./api";
+import {BaseParams, GetList, SearchAIMovie, Video, VideoParams} from "@/types";
+import {getSearchParamFromURL} from "@/utils/getSearchParamFromURL";
 
 const PATH = 'videos';
 
@@ -47,34 +44,13 @@ export const videosAPI = api.injectEndpoints({
       providesTags: [{ type: 'videos', id: 'ONE' }],
     }),
 
-    createVideo: build.mutation<Video, CreateVideoType>({
-      query: (body) => ({
-        url: `${PATH}/`,
-        method: 'POST',
-        body,
-      }),
-      invalidatesTags: (result) =>
-        result
-          ? [
-            { type: 'videos', id: result.publicId },
-            { type: 'videos', id: 'LIST' },
-          ]
-          : [{ type: 'videos', id: 'LIST' }],
-    }),
-
-    deleteVideo: build.mutation<string, { id: string }>({
-      query: ({ id }) => ({
-        url: `${PATH}/${id}/`,
-        method: 'DELETE',
-      }),
-      invalidatesTags: (result, _, { id }) =>
-        result
-          ? [{ type: 'personal_playlist' }, { type: 'videos', id }]
-          : [
-            { type: 'personal_playlist', id: 'one' },
-            { type: 'videos', id: 'LIST' },
-          ],
-    }),
+    // //summary
+    // getSummary: build.query<any, SummariesRequest>({
+    //   query: ({ playlistPk, videoPk }) => ({
+    //     url: `${path}/playlist/${playlistPk}/video/${videoPk}/summaries`,
+    //     method: 'GET',
+    //   }),
+    // }),
 
     getSearchVideos: build.query<SearchAIMovie[], { search_str?: string | null; playlist_id?: string }>({
       query: ({ search_str = '', playlist_id }) => ({
@@ -97,11 +73,11 @@ export const videosAPI = api.injectEndpoints({
   }),
 });
 
-// export const {
-//   useGetVideosQuery,
-//   useGetMyVideosQuery,
-//   useGetSearchVideosQuery,
-//   useDeleteVideoMutation,
-//   useLazyGetSearchVideosQuery,
-//   useGetMovieByIdQuery,
-// } = videosAPI;
+export const {
+  useGetVideosQuery,
+  // useGetSummaryQuery,
+  useGetMyVideosQuery,
+  useGetSearchVideosQuery,
+  useLazyGetSearchVideosQuery,
+  useGetMovieByIdQuery,
+} = videosAPI;

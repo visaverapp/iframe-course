@@ -138,6 +138,7 @@ export type SummaryResponse = {
 
 type SummaryResponseResults = {
   pdfFile: string;
+  markdown: string
   publicId: string;
 };
 

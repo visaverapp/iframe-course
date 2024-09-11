@@ -1,12 +1,13 @@
 import { Slide, SliderContainer, SliderStyled } from './InnerSlide.styled';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Video } from '@/types';
+import {Video, VideoWithFragments} from '@/types';
 import StyledLink from "@/components/StyledLink/StyledLink";
 import {FragmentCard} from "@/components/Card/FragmentCard/FragmentCard";
 import {ArrowButton} from "@/components/Button/ArrowButton/ArrowButton";
+import {secondsToTime} from "@/pages/Search/utils";
 type InnerSliderProps = {
-  items: Video;
+  items: VideoWithFragments;
 };
 
 const InnerSlider = ({ items }: InnerSliderProps) => {
@@ -101,13 +102,13 @@ const InnerSlider = ({ items }: InnerSliderProps) => {
   return (
     <SliderContainer>
       <SliderStyled {...settings} className="slider" cssEase="linear">
-        {items.cues.map(({ content }, i) => (
+        {items.cues.map(({ content, timestampLink ,image}, i) => (
           <div key={i}>
             <Slide index={i}>
               <StyledLink to={'/'} state={{ fromSearch: true }}>
                 <FragmentCard
-                  background_image='https://probusiness.visaver.online/frames/video_DmuB41GNl5U/00121.jpg'
-                  // timeStamp={secondsToTime(parseInt(timestampLink))}
+                  background_image={`https://visaver.online${image}`}
+                  timeStamp={secondsToTime(parseInt(timestampLink))}
                   content={content}
                 />
               </StyledLink>

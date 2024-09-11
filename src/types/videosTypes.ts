@@ -15,6 +15,14 @@ export interface Video {
   quizIds: string[];
 }
 
+export interface BaseAdminRequest {
+  videoPk: string;
+}
+
+export interface SummariesRequest extends BaseAdminRequest {
+  playlistPk: string;
+}
+
 export type SuggestVideoType = Pick<Video, 'title' | 'thumbnailUrl' | 'publicId'>;
 
 export interface PersonalMovie extends Video {
