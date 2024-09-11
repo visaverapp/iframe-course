@@ -1,37 +1,41 @@
 import { VideoFragmentCardProps } from './VideoFragmentCard.props';
 
 import PlayIcon from "@/components/SVGIcons/PlayIcon";
+import {secondsToTime} from "@/pages/Search/utils";
 
 export const VideoFragmentCard = ({
-  fragment: { content, timestampLink },
+  fragment,
   goToTime,
 }: VideoFragmentCardProps) => {
-  const startsFrom = parseInt(timestampLink);
+  const startsFrom = parseInt(fragment.timestampLink);
 
   const goToHandler = () => {
     goToTime?.(startsFrom);
   };
 
   return (
-    <div onClick={goToHandler}>
-      <div className='w-full'>
-        {/* bgImage={(image && getImageUrl(image)) || videoPreview || '/images/playlist_mock.png'}*/}
-        <button>
-          <PlayIcon />
-        </button>
-        {/* <VideoTime>
+      <div onClick={goToHandler}>
+        <div className='w-[704px]'>
+          {/* bgImage={(image && getImageUrl(image)) || videoPreview || '/images/playlist_mock.png'}*/}
+          {/*<button>*/}
+          {/*  <PlayIcon />*/}
+          {/*</button>*/}
+          {/* <VideoTime>
           {new Date(startsFrom * 1000).toLocaleTimeString('ru-RU', {
             second: '2-digit',
             minute: '2-digit',
           })}
         </VideoTime> */}
-      </div>
-      {/* <DescriptionMenuWrapper>
+        </div>
+        {/* <DescriptionMenuWrapper>
           </DescriptionMenuWrapper> */}
-      <div>
-        {/*<FragmentTime>{secondsToTime(startsFrom)}</FragmentTime>*/}
-        <p className='font-open-sans font-bold text-[16px] text-dark-blue' dangerouslySetInnerHTML={{ __html: content }} />
+        <div>
+        <span
+            className='text-[#00B856] font-open-sans font-bold text-[14px] pr-[5px]'>{secondsToTime(startsFrom)}</span>
+          <span className='text-dark-blue font-open-sans font-bold text-[14px]'>Стратегии продвижения на рынке.</span>
+          <p className='w-[704px] text-dark-blue font-open-sans font-normal text-[14px]'
+             dangerouslySetInnerHTML={{__html: fragment.content}}/>
+        </div>
       </div>
-    </div>
   );
 };

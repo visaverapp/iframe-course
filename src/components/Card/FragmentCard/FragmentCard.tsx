@@ -1,13 +1,13 @@
 import { FragmentCardProps } from './FragmentCard.props';
-import { VideoImageWrapper, Description, FragmentCardStyled, Time } from './FragmentCard.styled';
+import { VideoImageWrapper, Description, FragmentCardStyled } from './FragmentCard.styled';
 import {memo} from "react";
 
-export const FragmentCard = memo(({ background_image, content = '' }: FragmentCardProps) => {
+export const FragmentCard = memo(({ background_image, content = '', timeStamp }: FragmentCardProps) => {
   return (
-    <FragmentCardStyled>
-      <VideoImageWrapper background_image={background_image} />
-      <Time>00:05:14 Пример: анализ рынка доставки пиццы</Time>
-      <Description dangerouslySetInnerHTML={{ __html: content.slice(0, 55) + '...' }} />
-    </FragmentCardStyled>
+      <FragmentCardStyled>
+        <VideoImageWrapper background_image={background_image} />
+        <span className='font-bold font-open-sans text-[16px] text-[#6F42C1]'>{timeStamp}</span>
+        <Description dangerouslySetInnerHTML={{ __html: content.slice(0, 55) + '...' }} />
+      </FragmentCardStyled>
   );
 });

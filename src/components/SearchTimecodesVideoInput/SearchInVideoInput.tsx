@@ -1,54 +1,97 @@
-import {useState} from 'react';
-import clear from './images/clear.svg'
-import search from './images/Search.svg'
+import {useEffect, useRef, useState} from 'react';
+import ReactGA from "react-ga4";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import {useDebounce} from "@/hooks/useDebounce";
+import SearchIcon from "@/components/SVGIcons/SearchIcon";
+import BackIconWhite from "./../SVGIcons/backIconWhite";
 
 type SearchInVideoInputPropsType = {
-  onChange: (value: boolean)=> void
+  getSearch: (value: string) => Promise<void>;
 }
 
-export const SearchInVideoInput = ({onChange}: SearchInVideoInputPropsType) => {
-  const [inputValue, setInputValue] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
+export const SearchInVideoInput = ({getSearch}: SearchInVideoInputPropsType) => {
+  const [, setIsFocused] = useState(false);
+  const [showBackButton, setShowBackButton] = useState(false);
+  const [param, setParam] = useSearchParams();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleChange = (e: any) => {
-    setInputValue(e.target.value.trim());
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const search = param.get('search') || '';
+
+  useEffect(() => {
+    const data = searchInputRef.current?.value || '';
+    if (data) {
+      getSearch(data);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (location.state?.fromSearch) {
+      setShowBackButton(true);
+    } else {
+      setShowBackButton(false);
+    }
+  }, [location]);
+
+  const makeSearch = useDebounce(() => {
+    const data = searchInputRef.current?.value || '';
+    if (data) {
+      setParam((prev) => {
+        prev.set('search', data);
+        return prev;
+      });
+      getSearch(data);
+      ReactGA.event({
+        category: 'Search',
+        action: 'Search in playlist',
+      });
+    } else {
+      setParam((prev) => {
+        prev.delete('search');
+        return prev;
+      });
+    }
+  }, 500);
+
+  const handleBackClick = () => {
+    navigate('/search'); // Возврат на предыдущую страницу
   };
+
   const handleFocus = () => {
     setIsFocused(true);
-    onChange(true)
   };
 
   const handleBlur = () => {
     setIsFocused(false);
-    onChange(false)
   };
 
-  const clearInput = () => {
-    setInputValue('');
-    setIsFocused(false);
+  const onSearch = () => {
+    makeSearch();
   };
 
   return (
-      <div className="input-container relative">
-        <input
-            type="text"
-            value={inputValue}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-            className={`${isFocused ? 'w-[704px]' : 'w-[340px]'} focus:outline-none focus:border-light-gray self-end h-[40px] px-[16px] pt-[7px] pb-[10px] border-white-active border-[1px] rounded-[12px] text-[14px] text-dark-blue`}
-        />
-        <label className={`${isFocused && 'w-[97%] pointer-events-auto'} absolute left-[16px] top-[7px] pointer-events-none placeholder text-gray-default ${inputValue ? 'hidden' : ''}`}>
-          Что ищем в этом <span className="font-bold">видео</span>?
-          {isFocused ?
-              <img className='cursor-pointer absolute right-[17px] top-[8px]' src={clear as string}
-                   alt="clear"/>
-              : <img className='absolute right-[-128px] top-[1px]'  src={search as string} alt="search"
-                     onClick={clearInput}
-              />
-          }
-        </label>
-
+      <div className='flex gap-[10px] h-[40px]'>
+        {showBackButton && <button onClick={handleBackClick}
+                                   className='hover:bg-opacity-80 bg-[#514DF7] pl-3 w-[45px] h-[40px] rounded-[10px]'>
+            <BackIconWhite/>
+        </button>
+        }
+        <div className='relative'>
+          <input
+              type="text"
+              defaultValue={search}
+              ref={searchInputRef}
+              onChange={onSearch}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              placeholder='Какие слова ищем в этом видео?'
+              className={`${showBackButton ? 'w-[490px]' : 'w-[340px]'} focus:outline-none focus:border-light-gray self-end pl-[16px] pr-[45px] pt-[7px] pb-[7px] border-white-active border-[1px] rounded-[10px] text-[16px] text-dark-blue`}
+          />
+          <div className='absolute right-[2%] top-[25%]'>
+            <SearchIcon/>
+          </div>
+        </div>
       </div>
   );
 };

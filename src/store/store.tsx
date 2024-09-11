@@ -1,19 +1,12 @@
-import { categories } from './slices';
-import modal, { modalsSlice } from './slices/modalsSlice';
-import notification, { notificationSlice } from './slices/notificationSlice';
 import playlists from './slices/playlistsSlice';
-import quizAdmin, { quizAdminSlice } from './slices/quizAdminSlice';
-import quiz, { quizSlice } from './slices/quizSlice';
-import search, { searchSlice } from './slices/searchSlice';
-import timecodesAdmin, { timecodesAdminSlice } from './slices/timecodesAdminSlice';
-import user, { authUserSlice } from './slices/userSlice';
+import quiz, {quizSlice} from './slices/quizSlice';
+import search, {searchSlice} from './slices/searchSlice';
 
-import { api } from '@/api/api';
+import {api} from '@/api/api';
 
-import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/dist/query';
-
-import type { Action, ThunkAction } from '@reduxjs/toolkit';
+import type {Action, ThunkAction} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
+import {setupListeners} from '@reduxjs/toolkit/dist/query';
 
 export const store = configureStore({
   reducer: {
@@ -21,16 +14,10 @@ export const store = configureStore({
 
     playlists,
     search,
-    user,
-    modal,
-    notification,
-    categories,
     quiz,
-    quizAdmin,
-    timecodesAdmin,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }).concat(api.middleware),
-  // devTools: import.meta.env.MODE !== 'production',
+  devTools: import.meta.env.MODE !== 'production',
 });
 
 setupListeners(store.dispatch);
@@ -41,11 +28,6 @@ export type AppDispatch = typeof store.dispatch;
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
 
 export const rootActions = {
-  ...authUserSlice.actions,
-  ...modalsSlice.actions,
-  ...notificationSlice.actions,
   ...searchSlice.actions,
   ...quizSlice.actions,
-  ...timecodesAdminSlice.actions,
-  ...quizAdminSlice.actions,
 };

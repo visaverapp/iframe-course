@@ -47,35 +47,6 @@ export const videosAPI = api.injectEndpoints({
       providesTags: [{ type: 'videos', id: 'ONE' }],
     }),
 
-    createVideo: build.mutation<Video, CreateVideoType>({
-      query: (body) => ({
-        url: `${PATH}/`,
-        method: 'POST',
-        body,
-      }),
-      invalidatesTags: (result) =>
-        result
-          ? [
-            { type: 'videos', id: result.publicId },
-            { type: 'videos', id: 'LIST' },
-          ]
-          : [{ type: 'videos', id: 'LIST' }],
-    }),
-
-    deleteVideo: build.mutation<string, { id: string }>({
-      query: ({ id }) => ({
-        url: `${PATH}/${id}/`,
-        method: 'DELETE',
-      }),
-      invalidatesTags: (result, _, { id }) =>
-        result
-          ? [{ type: 'personal_playlist' }, { type: 'videos', id }]
-          : [
-            { type: 'personal_playlist', id: 'one' },
-            { type: 'videos', id: 'LIST' },
-          ],
-    }),
-
     getSearchVideos: build.query<SearchAIMovie[], { search_str?: string | null; playlist_id?: string }>({
       query: ({ search_str = '', playlist_id }) => ({
         url: searchPATH,
@@ -97,11 +68,10 @@ export const videosAPI = api.injectEndpoints({
   }),
 });
 
-// export const {
-//   useGetVideosQuery,
-//   useGetMyVideosQuery,
-//   useGetSearchVideosQuery,
-//   useDeleteVideoMutation,
-//   useLazyGetSearchVideosQuery,
-//   useGetMovieByIdQuery,
-// } = videosAPI;
+export const {
+  useGetVideosQuery,
+  useGetMyVideosQuery,
+  useGetSearchVideosQuery,
+  useLazyGetSearchVideosQuery,
+  useGetMovieByIdQuery,
+} = videosAPI;

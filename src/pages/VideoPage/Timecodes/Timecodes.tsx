@@ -1,54 +1,29 @@
 import {memo, useState} from "react";
+import {useGetTimecodesQuery} from "@/api";
+import {secondsToTime} from "@/pages/Search/utils";
 
-const data = [
-  {
-    "text": "Трекер - это инструмент для анализа рынка, который помогает понять конкуренцию, объем и динамику рынка, инновации и потребительское поведение. Неразбериха в использовании трекера чаще всего происходит из-за отсутствия навыков пользования им. Анализ рынка проводится для получения актуальной информации о рыночных условиях.",
-    "start": '00:00:00',
-    "title": "Искусство использования трекеров для мастерства анализа рынка."
-  },
-  {
-    "text": "Процесс анализа рынка включает получение запроса, проведение анализа, разработку маркетинговой или другой стратегии, её внедрение, а затем оценку результатов и выводов с последующим повторением цикла. Анализ необходим для правильного управленческого решения и строительства стратегий маркетинга, продаж и продукта. Для анализа используются digital сервисы, интервью, опросы, эксперименты и другие методы.",
-    "start": '00:00:29',
-    "title": "Цикл анализа рынка и стратегического планирования"
-  },
-  {
-    "text": "Предложены четыре важных вопроса для стартапов, которые необходимо включить в презентацию, особенно если она предназначена для инвесторов.",
-    "start": '00:00:57',
-    "title": "4 ключевых вопроса для презентации стартапа перед инвесторами"
-  },
-  {
-    "text": "Анализируем объем и долю рынка чтобы: 1) оценить его доходность и желание работать с проектом; 2) убедить инвесторов в целесообразности финансирования стартапа. Для анализа используем эффективный метод TAM-SAM-SOM, подробности которого объяснятся в следующем уроке. Кроме того, важно анализировать конкурентов: понимать, кто их клиенты, какие продукты они предлагают, ценообразование, маркетинговые каналы и расходы. Это обеспечивает ценную информацию и помогает в бенчмаркинге – сравнении с лучшими в отрасли для изучения их опыта. Важно усваивать лучшие практики и избегать ошибок конкурентов.",
-    "start": '00:02:53',
-    "title": "Оценка рыночного потенциала с методом TAM-SAM-SOM и анализ конкурентов для привлечения инвестиций"
-  },
-  {
-    "text": "Определение сильных и слабых сторон конкурентов для улучшения собственного продукта, осведомленность о существующих продуктах, ценообразовании, каналах продаж и маркетинговых инструментах. Анализ рынка с помощью онлайн-инструментов и тайного покупателя, даже если информация о конкурентах отсутствует в интернете.",
-    "start": '00:05:00',
-    "title": "Мастерство конкурентного анализа для усиления продукта."
-  },
-  {
-    "text": "Вступите в контакт с основателем стартапа или обратитесь в клиентский отдел, чтобы задать вопросы и узнать больше. Анализируйте, кто является клиентами стартапа и как они принимают решения о покупке, чтобы повысить продажи. Используйте онлайн-сервисы, социальные медиа, инстаграм, фейсбук и проводите опросы для анализа пути клиента. Исследуйте, почему аналогичные стартапы провалились или преуспели, изучая их историю, команды, сильные и слабые стороны, а также причины их успеха или неудач.",
-    "start": '00:07:29',
-    "title": "Вопросы исследования пути клиента для улучшения продаж стартапа"
-  },
-  {
-    "text": "Описывается процесс анализа рынка для стартапа или уже существующего бизнеса, который сталкивается с необходимостью запуска нового продукта или повышения продаж существующего. В нем обсуждается важность общения с фаундерами других проектов для обмена опытом, особенно если их проекты потерпели неудачу. Далее, разбираются этапы анализа: установление цели исследования, изучение продукта и его характеристик, анализ емкости рынка, сегментация рынка и клиентов, составление портрета потребителя, анализ эффективности рекламы, и определение политики ценообразования и продвижения.",
-    "start": '00:07:57',
-    "title": "Стратегии анализа рынка для оптимизации продаж"
-  },
-]
+interface TimecodesProps {
+  setTime: (time: number) => void;
+  playlistId: string;
+  id: string;
+  currentTime: number | null;
+}
 
-export const Timecodes = memo(() => {
+export const Timecodes = memo(({ setTime, playlistId, id, currentTime }: TimecodesProps) => {
   const [showTextIndex, setShowTextIndex] = useState(null)
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  // const [isCollapsed, setIsCollapsed] = useState(false)
+
+  const { data } = useGetTimecodesQuery({ playlistId: playlistId, videoPublicId: id });
+  // const timings = data?.map((array) => array.start) || [];
 
   const toggleText = (index: any) => {
     setShowTextIndex(prevIndex => (prevIndex === index ? null : index));
   };
 
-  const onReadMoreClick = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  // const onReadMoreClick = () => {
+  //   setIsCollapsed(!isCollapsed);
+  // };
+
 
 
   return (
@@ -57,10 +32,10 @@ export const Timecodes = memo(() => {
         {data && (
             <ol>
               {data.map(({start, text, title}, i) => (
-                  <li onClick={() => toggleText(i)}
+                  <li
                       className='cursor-pointer rounded-[12px] pb-[8px] pr-[8px]' key={i}>
-                    <div>
-                      <span className='text-lite-green font-open-sans font-bold text-[14px] pr-[5px]'>{start}</span>
+                    <div onClick={() => setTime(start)}>
+                      <span className='text-lite-green font-open-sans font-bold text-[14px] pr-[5px]'>{secondsToTime(start)}</span>
                       <span className='text-dark-blue font-open-sans font-bold text-[14px]'>{title}</span>
                     </div>
                     <div className='flex w-[670px] justify-between'>
@@ -68,7 +43,7 @@ export const Timecodes = memo(() => {
                           className='text-indigo font-open-sans font-normal text-[14px]'>
                         {showTextIndex === i ? text : text.slice(0, 85) + '...'}
                       </span>
-                      <span
+                      <span onClick={() => toggleText(i)}
                           className='self-end cursor-pointer text-green-hover font-open-sans font-normal text-[14px]'>
                         {showTextIndex === i ? 'Свернуть' : '...ещё'}
                       </span>
@@ -77,11 +52,11 @@ export const Timecodes = memo(() => {
               ))}
             </ol>
         )}
-        <div className='flex justify-end'>
-          <span className='cursor-pointer text-green-hover font-open-sans font-normal text-[14px]' onClick={onReadMoreClick}>
-            {isCollapsed ? 'Развернуть' : 'Свернуть'}
-          </span>
-        </div>
+        {/*<div className='flex justify-end'>*/}
+        {/*  <span className='cursor-pointer text-green-hover font-open-sans font-normal text-[14px]' onClick={onReadMoreClick}>*/}
+        {/*    {isCollapsed ? 'Развернуть' : 'Свернуть'}*/}
+        {/*  </span>*/}
+        {/*</div>*/}
       </div>
   );
 });

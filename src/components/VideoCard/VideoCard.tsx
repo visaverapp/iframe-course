@@ -17,24 +17,13 @@ export const VideoCard = ({video, iframeClassName}:VideoCardProps) => {
 
   return (
       <div ref={iframeWrapper}>
-        {video.source === 'YOUTUBE' && (
+        {video && (
             <YouTube iframeClassName={iframeClassName}
                      videoId={video.videoId}
                      title={video.title}
                      ref={iframe}
             />
         )}
-
-        {/*{video.source === 'VK' && (*/}
-        {/*    <iframe*/}
-        {/*        ref={vkRef}*/}
-        {/*        title={video.title}*/}
-        {/*        src={`${video.originLink}&hd=2&autoplay=14&t=${video.startsFrom || startsForm}s&js_api=1`}*/}
-        {/*        width="100%"*/}
-        {/*        height="500px"*/}
-        {/*        allow="autoplay; encrypted-media; fullscreen; picture-in-picture;"*/}
-        {/*    ></iframe>*/}
-        {/*)}*/}
       </div>
   );
 };
