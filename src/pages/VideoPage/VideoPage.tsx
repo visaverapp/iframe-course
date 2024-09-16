@@ -8,11 +8,14 @@ import {useSearchParams} from "react-router-dom";
 import YouTube from "react-youtube";
 import {playlistsAPI, videosAPI} from "@/api";
 import {VideoFragmentCard} from "@/components/Card/VideoFragmentCard";
+import FullScreenLoader from "@/components/FullScreenLoader/FullScreenLoader";
 
 export const VideoPage = () => {
   const [tab, setTab] = useState(1)
   const [isActiveInput] = useState(false)
   const [currentTime] = useState(null);
+  const [showVideoCard, setShowVideoCard] = useState(true);
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
   const iframe = useRef<YouTube>(null);
   const iframeWrapper = useRef<HTMLDivElement>(null);
   const vkRef = useRef<HTMLIFrameElement>(null);
@@ -22,14 +25,14 @@ export const VideoPage = () => {
 
   const {
     data: video,
-  } = videosAPI.useGetMovieByIdQuery({ id: videoId  ?? '' });
+  } = videosAPI.useGetMovieByIdQuery({id: videoId ?? ''});
 
-  const [getSearchVideos, { data: searchVideos }] =
+  const [getSearchVideos, {data: searchVideos}] =
       playlistsAPI.useLazyGetFullSearchQuery();  //получили все видео плейлиста
 
   const getSearchVideosHandler = useCallback(
       async (query: string) => {
-        await getSearchVideos({ query, publicId: playlistId || '' });
+        await getSearchVideos({query, publicId: playlistId || ''});
       },
       [playlistId],
   );
@@ -43,71 +46,81 @@ export const VideoPage = () => {
           const player = window.VK.VideoPlayer(vkRef.current);
           player.seek(time);
 
-          iframeWrapper.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          iframeWrapper.current?.scrollIntoView({behavior: 'smooth', block: 'center'});
           return;
         }
 
         iframe.current?.internalPlayer.seekTo(time, true);
-        iframeWrapper.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        iframeWrapper.current?.scrollIntoView({behavior: 'smooth', block: 'center'});
       },
       [video],
   );
 
   return (
       <section>
-        {/*{isLoading && <FullScreenLoader />}*/}
         {video && (
             <div className='flex flex-col gap-[12px]'>
-              <VideoCard video={video} iframeClassName='w-[100%] h-[404px]'/>
-              <p className='font-open-sans font-bold text-[16px] text-dark-blue'>{video.title}</p>
+              {showVideoCard && <><VideoCard video={video} iframeClassName='rounded-[12px] w-[100%] h-[404px]'/><p
+                  className='font-open-sans font-bold text-[16px] text-dark-blue'>{video.title}</p></>
+        }
 
-              <div>
-                {playlistId && (
-                    <>
-                      <div className='flex gap-[12px]'>
-                        <SearchInVideoInput getSearch={getSearchVideosHandler}/>
-                        {!isActiveInput &&
-                            <div className='flex border-white-active border-[1px] rounded-[12px] bg-white'>
-                                 <span className={`${tab === 1 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block pl-[24px] pr-[40px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`} onClick={() => setTab(1)}>Таймкоды</span>
-                                <span className={`${tab === 2 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`} onClick={() => setTab(2)}>Описание</span>
-                                <span className={`${tab === 3 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[116px] h-[40px] text-[14px] content-evenly`} onClick={() => setTab(3)}>Тест</span>
-                            </div>
-                        }
+        <div>
+          {playlistId && (
+              <>
+                <div className='flex gap-[12px]'>
+                  <SearchInVideoInput getSearch={getSearchVideosHandler}/>
+                  {!isActiveInput &&
+                      <div className='flex border-white-active border-[1px] rounded-[12px] bg-white'>
+                          <span
+                              className={`${tab === 1 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block pl-[24px] pr-[40px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`}
+                              onClick={() => setTab(1)}>Таймкоды</span>
+                          <span
+                              className={`${tab === 2 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`}
+                              onClick={() => setTab(2)}>Описание</span>
+                          <span
+                              className={`${tab === 3 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[116px] h-[40px] text-[14px] content-evenly`}
+                              onClick={() => setTab(3)}>Тест</span>
                       </div>
+                  }
+                </div>
 
 
-                    </>
-                )}
-              </div>
-              {tab === 1 ?
-                  <>
-                    {searchVideos && param.get('search') && (
-                        <div>
-                          {searchVideos &&
-                              searchVideos.map((fragment) =>
-                                  fragment.cues.map((cue, i) => {
-                                    if (fragment.publicId === video.publicId) {
-                                      return (
-                                          <VideoFragmentCard
-                                              fragment={cue}
-                                              key={fragment.publicId + i}
-                                              // goToTime={goToTime}
-                                              videoPreview={fragment.thumbnailUrl}
-                                          />
-                                      );
-                                    }
-                                  }),
-                              )}
-                        </div>
-                    )}
-                    {/*{isSearchLoading && <FullScreenLoader />}*/}
-                    {!param.get('search') && <Timecodes setTime={goToTime} currentTime={currentTime} id={videoId} playlistId={playlistId}/>}
-                  </> :
-                  tab === 2 ? <DescriptionTextVideo />
-                      : tab === 3 ? <QuizPage></QuizPage> : <></> }
+              </>
+          )}
+        </div>
+        {tab === 1 ?
+            <>
+              {searchVideos && param.get('search') && (
+                  <div>
+                    {searchVideos &&
+                        searchVideos.map((fragment) =>
+                            fragment.cues.map((cue, i) => {
+                              if (fragment.publicId === video.publicId) {
+                                return (
+                                    <VideoFragmentCard
+                                        fragment={cue}
+                                        key={fragment.publicId + i}
+                                        // goToTime={goToTime}
+                                        videoPreview={fragment.thumbnailUrl}
+                                    />
+                                );
+                              }
+                            }),
+                        )}
+                  </div>
+              )}
+              {isSearchLoading && <FullScreenLoader />}
+              {!param.get('search') &&
+                  <Timecodes onChange={(value) => setShowVideoCard(value)} setTime={goToTime} currentTime={currentTime}
+                             id={videoId} playlistId={playlistId}/>}
+            </> :
+            tab === 2 ? <DescriptionTextVideo/>
+                : tab === 3 ? <QuizPage></QuizPage> : <></>}
 
-            </div>
-        )}
-      </section>
-  );
+      </div>
+  )
+}
+</section>
+)
+  ;
 };
