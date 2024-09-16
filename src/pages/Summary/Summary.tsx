@@ -37,9 +37,9 @@ export const Summary = ({}: SummaryProps) => {
 
   return (
       <div
-          className={`${!isCollapsed ? 'h-[100%]' : 'h-[523px]'} w-[574px] bg-white pt-[8px] pb-[16px] pl-[16px] pr-[8px] rounded-[12px] border border-white-active`}>
+          className={`${!isCollapsed ? 'h-[100%]' : 'h-[523px]'} w-[650px] bg-white pt-[8px] pb-[16px] pl-[16px] pr-[8px] rounded-[12px] border border-white-active`}>
         <div className={`${!isCollapsed ? 'h-[779px]' : 'h-[485px]'} scroll-bar overflow-y-scroll`}>
-          <div className='flex gap-[272px]'>
+          <div className='flex gap-[346px]'>
             <h3 className='pb-[10px] text-dark-blue font-open-sans text-[16px] font-bold'>Стратегия выхода на рынок</h3>
             <div onClick={getSummaryHandle} className='cursor-pointer w-[40px] h-[40px] bg-[#00B856] rounded-[13px] content-evenly pl-[8px]'>
               <Download />
