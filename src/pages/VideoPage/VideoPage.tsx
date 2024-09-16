@@ -2,7 +2,6 @@ import {useCallback, useRef, useState} from "react";
 import {SearchInVideoInput} from "@/components/SearchTimecodesVideoInput/SearchInVideoInput";
 import {Timecodes} from "@/pages/VideoPage/Timecodes/Timecodes";
 import QuizPage from "@/pages/QuizPage/QuizPage";
-import {DescriptionTextVideo} from "@/pages/VideoPage/DescriptionTextVideo/DescriptionTextVideo";
 import {VideoCard} from "@/components/VideoCard/VideoCard";
 import {useSearchParams} from "react-router-dom";
 import YouTube from "react-youtube";
