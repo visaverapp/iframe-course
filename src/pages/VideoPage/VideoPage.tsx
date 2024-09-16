@@ -57,9 +57,12 @@ export const VideoPage = () => {
       [video],
   );
 
-  const showQuizVideo = () => {
-    setTab(3)
-    setShowQuiz(true)
+  const showQuizVideo = (tab: number) => {
+    setTab(tab)
+    if (tab === 3) {
+      setShowQuiz(true)
+    }
+    setShowQuiz(false)
   }
 
   return (
@@ -79,13 +82,13 @@ export const VideoPage = () => {
                       <div className='flex border-white-active border-[1px] rounded-[12px] bg-white'>
                           <span
                               className={`${tab === 1 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block pl-[24px] pr-[40px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`}
-                              onClick={() => setTab(1)}>Таймкоды</span>
+                              onClick={()=>showQuizVideo(1)}>Таймкоды</span>
                           <span
                               className={`${tab === 2 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`}
-                              onClick={() => setTab(2)}>Описание</span>
+                              onClick={()=>showQuizVideo(2)}>Описание</span>
                           <span
                               className={`${tab === 3 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[116px] h-[40px] text-[14px] content-evenly`}
-                              onClick={showQuizVideo}>Тест</span>
+                              onClick={()=>showQuizVideo(3)}>Тест</span>
                       </div>
                   }
                 </div>
