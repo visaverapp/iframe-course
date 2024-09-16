@@ -85,7 +85,7 @@ export const VideoPage = () => {
                               onClick={() => setTab(2)}>Описание</span>
                           <span
                               className={`${tab === 3 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[116px] h-[40px] text-[14px] content-evenly`}
-                              onClick={()=>showQuizVideo}>Тест</span>
+                              onClick={showQuizVideo}>Тест</span>
                       </div>
                   }
                 </div>
