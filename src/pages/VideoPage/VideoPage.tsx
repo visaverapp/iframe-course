@@ -72,9 +72,9 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
   return (
       <section>
         {video && (
-            <div className='flex flex-col gap-[12px]'>
+            <div className='flex flex-col gap-[12px] h-[96vh]'>
               {showVideoCard && <><VideoCard video={video}
-                                             iframeClassName={`${showQuiz ? 'mt-[-55px] z-0' : 'mt-[0px]'} h-[404px] rounded-[12px] w-[100%]`}/>
+                                             iframeClassName={`${showQuiz ? 'mt-[-11%] z-0' : 'mt-[0px]'} h-[404px] rounded-[12px] w-[100%]`}/>
                   <p
                       className='font-open-sans font-bold text-[16px] text-dark-blue'>{video.title}</p></>
               }
@@ -89,9 +89,9 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
                           <span
                               className={`${tab === 1 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block pl-[24px] pr-[40px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`}
                               onClick={() => showQuizVideo(1)}>Таймкоды</span>
-                                <span
+                           {/*     <span
                                     className={`${tab === 2 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`}
-                                    onClick={() => showQuizVideo(2)}>Описание</span>
+                                    onClick={() => showQuizVideo(2)}>Описание</span>*/}
                                 <span
                                     className={`${tab === 3 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[116px] h-[40px] text-[14px] content-evenly`}
                                     onClick={() => showQuizVideo(3)}>Тест</span>
@@ -107,7 +107,7 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
                   <>
                     {searchVideos && param.get('search') && (
                         <div
-                            className='h-[299px] scroll-bar overflow-y-scroll w-[709px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]'>
+                            className='h-[276px] scroll-bar overflow-y-scroll w-[709px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]'>
                           {searchVideos &&
                               searchVideos.map((fragment) =>
                                   fragment.cues.map((cue, i) => {
@@ -130,8 +130,9 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
                         <Timecodes onChange={(value) => setShowVideoCard(value)} setTime={goToTime}
                                    currentTime={currentTime}
                                    id={videoId} playlistId={playlistId}/>}
-                  </> :
-                  tab === 2 ? <DescriptionTextVideo/>
+                  </>
+                  /*:
+                  tab === 2 ? <DescriptionTextVideo/>*/
                       : tab === 3 ? <QuizPage></QuizPage> : <></>}
 
             </div>

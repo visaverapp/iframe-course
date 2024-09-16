@@ -88,7 +88,7 @@ export const SearchInVideoInput = ({getSearch,setIsActiveInput, isActiveInput }:
               onBlur={handleBlur}
               onFocus={handleFocus}
               placeholder='Что ищем в этом видео?'
-              className={`${isActiveInput ? 'w-[711px]' : 'w-[340px]'} focus:outline-none focus:border-light-gray self-end pl-[16px] pr-[45px] pt-[7px] pb-[7px] border-white-active border-[1px] rounded-[10px] text-[16px] text-dark-blue`}
+              className={`${isActiveInput ? 'w-[711px]' : 'w-[457px]'} focus:outline-none focus:border-light-gray self-end pl-[16px] pr-[45px] pt-[7px] pb-[7px] border-white-active border-[1px] rounded-[10px] text-[16px] text-dark-blue`}
           />
           {!isActiveInput ?
               <div className='absolute right-[2%] top-[25%]'>

@@ -37,7 +37,7 @@ export const SearchResultPage = () => {
           </div>
           <Tabs activeTab={activeTab} onChange={(index: number) => setActiveTab(index)}/>
         </div>
-        <div className='relative flex flex-col h-[620px] scroll-bar overflow-y-scroll'>
+        <div className='relative flex flex-col scroll-bar overflow-y-scroll'>
           {activeTab === 0 ?
               <div>
                 {videos && !params.get('search') && videos.map(video => <SearchVideoCard key={video.publicId}

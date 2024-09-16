@@ -30,12 +30,12 @@ export const Timecodes = memo(({ setTime, playlistId, id, onChange }: TimecodesP
 
   return (
       <div
-          className={`${isCollapsed ? 'h-[751px]': 'h-[299px]' } relative scroll-bar overflow-y-scroll w-[712px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]`}>
+          className={`${isCollapsed ? 'h-[751px]': 'h-[100%]' } relative scroll-bar overflow-y-scroll w-[712px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]`}>
         {data && (
             <ol>
               {data.map(({start, text, title}, i) => (
                   <li
-                      className='cursor-pointer rounded-[12px] pb-[8px] last:pb-[22px] pr-[8px]' key={i}>
+                      className='cursor-pointer rounded-[12px] pb-[8px] pr-[8px]' key={i}>
                     <div onClick={() => setTime(start)}>
                       <span className='text-lite-green font-open-sans font-bold text-[14px] pr-[5px]'>{secondsToTime(start)}</span>
                       <span className='text-dark-blue font-open-sans font-bold text-[14px]'>{title}</span>
@@ -54,7 +54,7 @@ export const Timecodes = memo(({ setTime, playlistId, id, onChange }: TimecodesP
               ))}
             </ol>
         )}
-        <div className='sticky bottom-[-1%] text-right'>
+        <div className='relative bottom-[-1%] text-right'>
           <span className='cursor-pointer text-green-hover font-open-sans font-normal text-[14px]' onClick={onReadMoreClick}>
             {!isCollapsed ? 'Развернуть' : 'Свернуть'}
           </span>
