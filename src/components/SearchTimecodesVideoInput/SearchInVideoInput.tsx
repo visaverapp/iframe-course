@@ -3,13 +3,16 @@ import ReactGA from "react-ga4";
 import {useSearchParams} from "react-router-dom";
 import {useDebounce} from "@/hooks/useDebounce";
 import SearchIcon from "@/components/SVGIcons/SearchIcon";
+import {ClearIcon} from "@/components/SVGIcons/ClearIcon";
 
 type SearchInVideoInputPropsType = {
   getSearch: (value: string) => Promise<void>
   showBackButton?: boolean
+  setIsActiveInput: (value: boolean) => void
+  isActiveInput: boolean
 }
 
-export const SearchInVideoInput = ({getSearch, showBackButton}: SearchInVideoInputPropsType) => {
+export const SearchInVideoInput = ({getSearch,setIsActiveInput, isActiveInput }: SearchInVideoInputPropsType) => {
   const [, setIsFocused] = useState(false);
   // const [showBackButton, setShowBackButton] = useState(false);
   const [param, setParam] = useSearchParams();
@@ -54,20 +57,24 @@ export const SearchInVideoInput = ({getSearch, showBackButton}: SearchInVideoInp
     }
   }, 500);
 
-  // const handleBackClick = () => {
-  //   navigate('/search'); // Возврат на предыдущую страницу
-  // };
 
   const handleFocus = () => {
     setIsFocused(true);
+    setIsActiveInput(true)
   };
 
   const handleBlur = () => {
     setIsFocused(false);
+    setIsActiveInput(false)
   };
 
   const onSearch = () => {
     makeSearch();
+  };
+
+  const clearInput = () => {
+    searchInputRef.current!.value = '';
+    setParam('')
   };
 
   return (
@@ -81,11 +88,16 @@ export const SearchInVideoInput = ({getSearch, showBackButton}: SearchInVideoInp
               onBlur={handleBlur}
               onFocus={handleFocus}
               placeholder='Что ищем в этом видео?'
-              className={`${!showBackButton ? 'w-[490px]' : 'w-[340px]'} focus:outline-none focus:border-light-gray self-end pl-[16px] pr-[45px] pt-[7px] pb-[7px] border-white-active border-[1px] rounded-[10px] text-[16px] text-dark-blue`}
+              className={`${isActiveInput ? 'w-[711px]' : 'w-[340px]'} focus:outline-none focus:border-light-gray self-end pl-[16px] pr-[45px] pt-[7px] pb-[7px] border-white-active border-[1px] rounded-[10px] text-[16px] text-dark-blue`}
           />
-          <div className='absolute right-[2%] top-[25%]'>
-            <SearchIcon/>
-          </div>
+          {!isActiveInput ?
+              <div className='absolute right-[2%] top-[25%]'>
+                <SearchIcon/>
+              </div>
+              : <div onClick={clearInput} className='cursor-pointer absolute right-[3%] top-[35%]'>
+                <ClearIcon/>
+              </div>
+          }
         </div>
       </div>
   );

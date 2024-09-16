@@ -15,7 +15,7 @@ interface VideoPage {
 }
 export const VideoPage = ({showBackButton}: VideoPage) => {
   const [tab, setTab] = useState(1)
-  const [isActiveInput] = useState(false)
+  const [isActiveInput, setIsActiveInput] = useState(false)
   const [currentTime] = useState(null);
   const [showVideoCard, setShowVideoCard] = useState(true);
   const [showQuiz, setShowQuiz] = useState(false);
@@ -83,7 +83,7 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
                 {playlistId && (
                     <>
                       <div className='flex gap-[12px]'>
-                        <SearchInVideoInput showBackButton={showBackButton} getSearch={getSearchVideosHandler}/>
+                        <SearchInVideoInput isActiveInput={isActiveInput} setIsActiveInput={(value)=>setIsActiveInput(value)} showBackButton={showBackButton} getSearch={getSearchVideosHandler}/>
                         {!isActiveInput &&
                             <div className='flex border-white-active border-[1px] rounded-[12px] bg-white'>
                           <span
