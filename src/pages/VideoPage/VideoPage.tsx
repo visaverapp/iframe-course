@@ -10,7 +10,10 @@ import {playlistsAPI, videosAPI} from "@/api";
 import {VideoFragmentCard} from "@/components/Card/VideoFragmentCard";
 import FullScreenLoader from "@/components/FullScreenLoader/FullScreenLoader";
 
-export const VideoPage = () => {
+interface VideoPage {
+  showBackButton: boolean
+}
+export const VideoPage = ({showBackButton}: VideoPage) => {
   const [tab, setTab] = useState(1)
   const [isActiveInput] = useState(false)
   const [currentTime] = useState(null);
@@ -61,75 +64,80 @@ export const VideoPage = () => {
     setTab(tab)
     if (tab === 3) {
       setShowQuiz(true)
+    } else {
+      setShowQuiz(false)
     }
-    setShowQuiz(false)
   }
 
   return (
       <section>
         {video && (
             <div className='flex flex-col gap-[12px]'>
-              {showVideoCard && <><VideoCard video={video} iframeClassName={`${showQuiz ? 'mt-[-55px]' : 'mt-[0px]'} h-[404px] rounded-[12px] w-[100%]`}/><p
-                  className='font-open-sans font-bold text-[16px] text-dark-blue'>{video.title}</p></>
-        }
+              {showVideoCard && <><VideoCard video={video}
+                                             iframeClassName={`${showQuiz ? 'mt-[-55px] z-0' : 'mt-[0px]'} h-[404px] rounded-[12px] w-[100%]`}/>
+                  <p
+                      className='font-open-sans font-bold text-[16px] text-dark-blue'>{video.title}</p></>
+              }
 
-        <div>
-          {playlistId && (
-              <>
-                <div className='flex gap-[12px]'>
-                  <SearchInVideoInput getSearch={getSearchVideosHandler}/>
-                  {!isActiveInput &&
-                      <div className='flex border-white-active border-[1px] rounded-[12px] bg-white'>
+              <div>
+                {playlistId && (
+                    <>
+                      <div className='flex gap-[12px]'>
+                        <SearchInVideoInput showBackButton={showBackButton} getSearch={getSearchVideosHandler}/>
+                        {!isActiveInput &&
+                            <div className='flex border-white-active border-[1px] rounded-[12px] bg-white'>
                           <span
                               className={`${tab === 1 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block pl-[24px] pr-[40px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`}
-                              onClick={()=>showQuizVideo(1)}>Таймкоды</span>
-                          <span
-                              className={`${tab === 2 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`}
-                              onClick={()=>showQuizVideo(2)}>Описание</span>
-                          <span
-                              className={`${tab === 3 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[116px] h-[40px] text-[14px] content-evenly`}
-                              onClick={()=>showQuizVideo(3)}>Тест</span>
+                              onClick={() => showQuizVideo(1)}>Таймкоды</span>
+                                <span
+                                    className={`${tab === 2 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[120px] h-[40px] text-[14px] content-evenly`}
+                                    onClick={() => showQuizVideo(2)}>Описание</span>
+                                <span
+                                    className={`${tab === 3 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[116px] h-[40px] text-[14px] content-evenly`}
+                                    onClick={() => showQuizVideo(3)}>Тест</span>
+                            </div>
+                        }
                       </div>
-                  }
-                </div>
 
 
-              </>
-          )}
-        </div>
-        {tab === 1 ?
-            <>
-              {searchVideos && param.get('search') && (
-                  <div>
-                    {searchVideos &&
-                        searchVideos.map((fragment) =>
-                            fragment.cues.map((cue, i) => {
-                              if (fragment.publicId === video.publicId) {
-                                return (
-                                    <VideoFragmentCard
-                                        fragment={cue}
-                                        key={fragment.publicId + i}
-                                        // goToTime={goToTime}
-                                        videoPreview={fragment.thumbnailUrl}
-                                    />
-                                );
-                              }
-                            }),
-                        )}
-                  </div>
-              )}
-              {isSearchLoading && <FullScreenLoader />}
-              {!param.get('search') &&
-                  <Timecodes onChange={(value) => setShowVideoCard(value)} setTime={goToTime} currentTime={currentTime}
-                             id={videoId} playlistId={playlistId}/>}
-            </> :
-            tab === 2 ? <DescriptionTextVideo/>
-                : tab === 3 ? <QuizPage></QuizPage> : <></>}
+                    </>
+                )}
+              </div>
+              {tab === 1 ?
+                  <>
+                    {searchVideos && param.get('search') && (
+                        <div
+                            className='h-[299px] scroll-bar overflow-y-scroll w-[709px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]'>
+                          {searchVideos &&
+                              searchVideos.map((fragment) =>
+                                  fragment.cues.map((cue, i) => {
+                                    if (fragment.publicId === video.publicId) {
+                                      return (
+                                          <VideoFragmentCard
+                                              fragment={cue}
+                                              key={fragment.publicId + i}
+                                              // goToTime={goToTime}
+                                              videoPreview={fragment.thumbnailUrl}
+                                          />
+                                      );
+                                    }
+                                  }),
+                              )}
+                        </div>
+                    )}
+                    {isSearchLoading && <FullScreenLoader/>}
+                    {!param.get('search') &&
+                        <Timecodes onChange={(value) => setShowVideoCard(value)} setTime={goToTime}
+                                   currentTime={currentTime}
+                                   id={videoId} playlistId={playlistId}/>}
+                  </> :
+                  tab === 2 ? <DescriptionTextVideo/>
+                      : tab === 3 ? <QuizPage></QuizPage> : <></>}
 
-      </div>
+            </div>
+        )
+        }
+      </section>
   )
-}
-</section>
-)
-  ;
+      ;
 };

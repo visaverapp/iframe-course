@@ -97,7 +97,7 @@ const InnerSlider = ({ items }: InnerSliderProps) => {
     return null;
   }
 
-  console.log(items.cues)
+  // console.log(items.cues)
 
   return (
       <SliderContainer>

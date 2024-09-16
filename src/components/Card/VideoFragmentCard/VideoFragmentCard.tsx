@@ -31,7 +31,7 @@ export const VideoFragmentCard = ({
         <span
             className='text-[#00B856] font-open-sans font-bold text-[14px] pr-[5px]'>{secondsToTime(startsFrom)}</span>
           <span className='text-dark-blue font-open-sans font-bold text-[14px]'>Стратегии продвижения на рынке.</span>
-          <p className='w-[704px] text-dark-blue font-open-sans font-normal text-[14px]'
+          <p className='w-[685px] text-dark-blue font-open-sans font-normal text-[14px]'
              dangerouslySetInnerHTML={{__html: fragment.content}}/>
         </div>
       </div>
