@@ -3,8 +3,8 @@ import {Download} from "@/components/SVGIcons/Download";
 import {useLazyGetDocsQuery} from "@/api";
 
 interface SummaryProps {
-  id: string
-  playlistId: string
+  // id: string
+  // playlistId: string
   // onChange: (value: boolean)=> void
 }
 export const Summary = ({}: SummaryProps) => {

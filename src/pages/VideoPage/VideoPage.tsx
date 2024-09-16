@@ -15,7 +15,7 @@ export const VideoPage = () => {
   const [isActiveInput] = useState(false)
   const [currentTime] = useState(null);
   const [showVideoCard, setShowVideoCard] = useState(true);
-  const [isSearchLoading, setIsSearchLoading] = useState(false);
+  const [isSearchLoading] = useState(false);
   const iframe = useRef<YouTube>(null);
   const iframeWrapper = useRef<HTMLDivElement>(null);
   const vkRef = useRef<HTMLIFrameElement>(null);
