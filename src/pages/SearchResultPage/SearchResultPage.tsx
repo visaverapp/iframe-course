@@ -31,7 +31,7 @@ export const SearchResultPage = () => {
   return (
       <div className='pt-[12px]'>
         <div>
-          <div className='absolute left-[18%] top-[9%]'>
+          <div className='absolute left-[18%] top-[10%]'>
             <Toggle title='Искать по точному совпадению' checked={isChecked} onChange={() => {
             }}/>
           </div>
