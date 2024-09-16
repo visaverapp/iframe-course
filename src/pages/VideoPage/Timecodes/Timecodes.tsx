@@ -30,7 +30,7 @@ export const Timecodes = memo(({ setTime, playlistId, id, onChange }: TimecodesP
 
   return (
       <div
-          className={`${isCollapsed ? 'h-[751px]': 'h-[299px]' } scroll-bar overflow-y-scroll w-[712px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]`}>
+          className={`${isCollapsed ? 'h-[751px]': 'h-[299px]' } relative scroll-bar overflow-y-scroll w-[712px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]`}>
         {data && (
             <ol>
               {data.map(({start, text, title}, i) => (
@@ -54,7 +54,7 @@ export const Timecodes = memo(({ setTime, playlistId, id, onChange }: TimecodesP
               ))}
             </ol>
         )}
-        <div className='fixed bottom-[6%] right-[51%]'>
+        <div className='sticky bottom-[-1%]'>
           <span className='cursor-pointer text-green-hover font-open-sans font-normal text-[14px]' onClick={onReadMoreClick}>
             {!isCollapsed ? 'Развернуть' : 'Свернуть'}
           </span>
