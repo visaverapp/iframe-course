@@ -15,6 +15,7 @@ export const VideoPage = () => {
   const [isActiveInput] = useState(false)
   const [currentTime] = useState(null);
   const [showVideoCard, setShowVideoCard] = useState(true);
+  const [showQuiz, setShowQuiz] = useState(false);
   const [isSearchLoading] = useState(false);
   const iframe = useRef<YouTube>(null);
   const iframeWrapper = useRef<HTMLDivElement>(null);
@@ -56,11 +57,16 @@ export const VideoPage = () => {
       [video],
   );
 
+  const showQuizVideo = () => {
+    setTab(3)
+    setShowQuiz(true)
+  }
+
   return (
       <section>
         {video && (
             <div className='flex flex-col gap-[12px]'>
-              {showVideoCard && <><VideoCard video={video} iframeClassName='rounded-[12px] w-[100%] h-[404px]'/><p
+              {showVideoCard && <><VideoCard video={video} iframeClassName={`${showQuiz ? 'mt-[-55px]' : 'mt-[0px]'} h-[404px] rounded-[12px] w-[100%]`}/><p
                   className='font-open-sans font-bold text-[16px] text-dark-blue'>{video.title}</p></>
         }
 
@@ -79,7 +85,7 @@ export const VideoPage = () => {
                               onClick={() => setTab(2)}>Описание</span>
                           <span
                               className={`${tab === 3 ? 'bg-green-active font-bold text-white' : 'bg-white font-normal text-dark-blue'} cursor-pointer block px-[26px] py-[8px] font-open-sans rounded-[12px] text-center w-[116px] h-[40px] text-[14px] content-evenly`}
-                              onClick={() => setTab(3)}>Тест</span>
+                              onClick={()=>showQuizVideo}>Тест</span>
                       </div>
                   }
                 </div>

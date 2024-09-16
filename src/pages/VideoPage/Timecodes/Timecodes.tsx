@@ -54,7 +54,7 @@ export const Timecodes = memo(({ setTime, playlistId, id, onChange }: TimecodesP
               ))}
             </ol>
         )}
-        <div className='sticky bottom-[-1%]'>
+        <div className='sticky bottom-[-1%] text-right'>
           <span className='cursor-pointer text-green-hover font-open-sans font-normal text-[14px]' onClick={onReadMoreClick}>
             {!isCollapsed ? 'Развернуть' : 'Свернуть'}
           </span>
