@@ -73,7 +73,7 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
         {video && (
             <div className='flex flex-col gap-[12px] h-[96vh]'>
               {showVideoCard && <><VideoCard video={video}
-                                             iframeClassName={`${showQuiz ? 'mt-[-11%] z-0' : 'mt-[0px]'} h-[404px] rounded-[12px] w-[100%]`}/>
+                                             iframeClassName={`${showQuiz ? 'mt-[-5%] z-0' : 'mt-[0px]'} h-[404px] rounded-[12px] w-[100%]`}/>
                   <p
                       className='font-open-sans font-bold text-[16px] text-dark-blue'>{video.title}</p></>
               }
@@ -106,7 +106,7 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
                   <>
                     {searchVideos && param.get('search') && (
                         <div
-                            className='h-[276px] scroll-bar overflow-y-scroll w-[709px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]'>
+                            className='h-[100%] scroll-bar overflow-y-scroll w-[709px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]'>
                           {searchVideos &&
                               searchVideos.map((fragment) =>
                                   fragment.cues.map((cue, i) => {

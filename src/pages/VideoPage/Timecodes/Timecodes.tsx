@@ -30,7 +30,7 @@ export const Timecodes = memo(({ setTime, playlistId, id, onChange }: TimecodesP
 
   return (
       <div
-          className={`${isCollapsed ? 'h-[751px]': 'h-[100%]' } relative scroll-bar overflow-y-scroll w-[712px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]`}>
+          className={`${isCollapsed ? 'h-[100%]': 'h-[100%]' } relative scroll-bar overflow-y-scroll w-[712px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]`}>
         {data && (
             <ol>
               {data.map(({start, text, title}, i) => (
