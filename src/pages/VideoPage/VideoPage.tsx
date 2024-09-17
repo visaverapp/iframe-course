@@ -83,7 +83,7 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
         {video && (
             <div className={`${isChangedHeight ? 'h-[88vh]' : 'h-[96vh]'} flex flex-col gap-[12px]`}>
               {showVideoCard && <><VideoCard video={video}
-                                             iframeClassName={`${showQuiz ? 'mt-[-5%] z-0' : isChangedHeight ? 'mt-[-15%] z-0' : 'mt-[0px]'} h-[404px] rounded-[12px] w-[100%]`}/>
+                                             iframeClassName={`${showQuiz ? 'mt-[-5%] z-0' : isChangedHeight ? 'mt-[-15%]' : 'mt-[0px]'} h-[404px] rounded-[12px] w-[100%]`}/>
                   <p
                       className='font-open-sans font-bold text-[16px] text-dark-blue'>{video.title}</p></>
               }
