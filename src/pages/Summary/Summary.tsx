@@ -1,6 +1,7 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Download} from "@/components/SVGIcons/Download";
 import {useLazyGetDocsQuery} from "@/api";
+import {useLocation} from "react-router-dom";
 
 interface SummaryProps {
   // id: string
@@ -8,9 +9,19 @@ interface SummaryProps {
   // onChange: (value: boolean)=> void
 }
 export const Summary = ({}: SummaryProps) => {
-  const [isCollapsed] = useState(false)
   const playlistId = "59609dd8-7ef4-4080-9cb8-3c2cab266494"
   const videoId = "5ec5bb33-9c1e-4295-8a82-ca36138da3cb"
+  const location = useLocation();
+  const [isChangedHeight, setIsChangedHeight] = useState(false);
+
+
+  useEffect(() => {
+    if (location.state?.fromSearch) {
+      setIsChangedHeight(true);
+    } else {
+      setIsChangedHeight(false);
+    }
+  }, [location]);
 
   const [getDocs] = useLazyGetDocsQuery();
   const getSummaryHandle = async () => {
@@ -37,8 +48,8 @@ export const Summary = ({}: SummaryProps) => {
 
   return (
       <div
-          className={`${!isCollapsed ? 'h-[96vh]' : 'h-[88vh]'} w-[650px] bg-white pt-[8px] pb-[16px] pl-[16px] pr-[8px] rounded-[12px] border border-white-active`}>
-        <div className={`${!isCollapsed ? 'h-[93vh]' : 'h-[85vh]'} scroll-bar overflow-y-scroll`}>
+          className={`${!isChangedHeight ? 'h-[96vh]' : 'h-[88vh]'} w-[650px] bg-white pt-[8px] pb-[16px] pl-[16px] pr-[8px] rounded-[12px] border border-white-active`}>
+        <div className={`${!isChangedHeight ? 'h-[93vh]' : 'h-[85vh]'} scroll-bar overflow-y-scroll`}>
           <div className='flex justify-between'>
             <h3 className='pb-[10px] text-dark-blue font-open-sans text-[16px] font-bold'>Стратегия выхода на рынок</h3>
             <div onClick={getSummaryHandle} className='cursor-pointer w-[40px] h-[40px] bg-[#00B856] rounded-[13px] content-evenly pl-[8px]'>
