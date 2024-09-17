@@ -1,9 +1,9 @@
-import {useCallback, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {SearchInVideoInput} from "@/components/SearchTimecodesVideoInput/SearchInVideoInput";
 import {Timecodes} from "@/pages/VideoPage/Timecodes/Timecodes";
 import QuizPage from "@/pages/QuizPage/QuizPage";
 import {VideoCard} from "@/components/VideoCard/VideoCard";
-import {useSearchParams} from "react-router-dom";
+import {useLocation, useSearchParams} from "react-router-dom";
 import YouTube from "react-youtube";
 import {playlistsAPI, videosAPI} from "@/api";
 import {VideoFragmentCard} from "@/components/Card/VideoFragmentCard";
@@ -17,6 +17,7 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
   const [isActiveInput, setIsActiveInput] = useState(false)
   const [currentTime] = useState(null);
   const [showVideoCard, setShowVideoCard] = useState(true);
+  const [isChangedHeight, setIsChangedHeight] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
   const [isSearchLoading] = useState(false);
   const iframe = useRef<YouTube>(null);
@@ -25,6 +26,15 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
   const [param] = useSearchParams();
   const playlistId = "59609dd8-7ef4-4080-9cb8-3c2cab266494"
   const videoId = "5ec5bb33-9c1e-4295-8a82-ca36138da3cb"
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.fromSearch) {
+      setIsChangedHeight(true);
+    } else {
+      setIsChangedHeight(false);
+    }
+  }, [location]);
 
   const {
     data: video,
@@ -71,7 +81,7 @@ export const VideoPage = ({showBackButton}: VideoPage) => {
   return (
       <section>
         {video && (
-            <div className='flex flex-col gap-[12px] h-[96vh]'>
+            <div className={`${isChangedHeight ? 'h-[88vh]' : 'h-[96vh]'} flex flex-col gap-[12px]`}>
               {showVideoCard && <><VideoCard video={video}
                                              iframeClassName={`${showQuiz ? 'mt-[-5%] z-0' : 'mt-[0px]'} h-[404px] rounded-[12px] w-[100%]`}/>
                   <p
