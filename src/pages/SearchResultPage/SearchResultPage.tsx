@@ -12,35 +12,34 @@ export const SearchResultPage = () => {
   const [params] = useSearchParams();
   const [isChecked] = useState(false)
   const [activeTab, setActiveTab] = useState(0);
+  const [toggleActive, setToggleActive] = useState(false);
   const search = useRef<HTMLInputElement | null>(null);
 
-  // const {data, isFetching, isLoading, isSuccess} = videosAPI.useGetMyVideosQuery({});
   const {data: playlists} = playlistsAPI.useGetMyPlaylistsQuery({})
   const videos = playlists?.results[0].videos
-  console.log(videos)
 
-  // const makeSearch = useDebounce(() => {
-  //   const data = search.current?.value || '';
-  //   if (data) {
-  //     setParams({search: data});
-  //   } else {
-  //     setParams({});
-  //   }
-  // }, 500);
+  const {data: fragments} = playlistsAPI.useGetFullSearchQuery({
+    publicId: "59609dd8-7ef4-4080-9cb8-3c2cab266494",
+    query: search.current?.value || params.get("search") || ""
+  });
+
+  const searchItemCountAll = `${videos && fragments ? videos.length + fragments.length : ''}`
+  const tabs = [`Все (${searchItemCountAll})`, `Фрагменты (${fragments?.length})`, `Видео (${videos?.length})`]
 
   return (
       <div className='pt-[12px]'>
         <div>
           <div className='absolute left-[18%] top-[10%]'>
-            <Toggle title='Искать по точному совпадению' checked={isChecked} onChange={() => {
-            }}/>
+            <Toggle title='Искать по точному совпадению' checked={isChecked} onChange={() => setToggleActive(prevState => !prevState)}/>
           </div>
-          <Tabs activeTab={activeTab} onChange={(index: number) => setActiveTab(index)}/>
+          <Tabs tabsLabel={tabs} activeTab={activeTab} onChange={(index: number) => setActiveTab(index)}/>
         </div>
         <div className='relative flex flex-col scroll-bar overflow-y-scroll'>
           {activeTab === 0 ?
               <div>
-                {videos && !params.get('search') && videos.map(video => <SearchVideoCard key={video.publicId}
+                {!toggleActive && videos && videos.map(video => <SearchVideoCard key={video.publicId}
+                                                                                         video={video}/>)}
+                {toggleActive && !params.get('search') && videos?.map(video => <SearchVideoCard key={video.publicId}
                                                                                          video={video}/>)}
                 <ResultVideoInnerWithScreenShot search={search}/>
               </div>

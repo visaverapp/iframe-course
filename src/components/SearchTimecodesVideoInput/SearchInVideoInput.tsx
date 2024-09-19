@@ -1,9 +1,12 @@
-import {useEffect, useRef, useState} from 'react';
-import ReactGA from "react-ga4";
-import {useSearchParams} from "react-router-dom";
+import {createRef, RefObject, useEffect, useMemo, useRef, useState} from 'react';
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {useDebounce} from "@/hooks/useDebounce";
 import SearchIcon from "@/components/SVGIcons/SearchIcon";
 import {ClearIcon} from "@/components/SVGIcons/ClearIcon";
+import {useGetTimecodesQuery} from "@/api";
+import {secondsToTime} from "@/pages/Search/utils";
+import {SuggestionSearchWrapper, SuggestionsItem, SuggestionsList} from "@/components/SearchInput/SearchInputStyle";
+import {LabelText} from "@/styles";
 
 type SearchInVideoInputPropsType = {
   getSearch: (value: string) => Promise<void>
@@ -12,12 +15,30 @@ type SearchInVideoInputPropsType = {
   isActiveInput: boolean
 }
 
-export const SearchInVideoInput = ({getSearch,setIsActiveInput, isActiveInput }: SearchInVideoInputPropsType) => {
+export const SearchInVideoInput = ({getSearch, setIsActiveInput, isActiveInput}: SearchInVideoInputPropsType) => {
   const [, setIsFocused] = useState(false);
-  // const [showBackButton, setShowBackButton] = useState(false);
   const [param, setParam] = useSearchParams();
-  // const location = useLocation();
-  // const navigate = useNavigate();
+  const [suggestions, setSuggestions] = useState<{ start: number; textTimecode: string; }[]>([]);
+  const [selectedSuggestion, setSelectedSuggestion] = useState(-1);
+  const [, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const playlistId = "59609dd8-7ef4-4080-9cb8-3c2cab266494"
+  const videoId = "5ec5bb33-9c1e-4295-8a82-ca36138da3cb"
+
+  const {data: timecodesData} = useGetTimecodesQuery({playlistId: playlistId, videoPublicId: videoId});
+
+  useEffect(() => {
+    if (timecodesData) {
+      console.log(timecodesData)
+      const suggestionsList = timecodesData.map(item => ({
+        start: item.start,
+        textTimecode: item.text
+      }));
+      console.log(suggestionsList)
+      setSuggestions(suggestionsList)
+    }
+  }, [])
 
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const search = param.get('search') || '';
@@ -29,14 +50,6 @@ export const SearchInVideoInput = ({getSearch,setIsActiveInput, isActiveInput }:
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (location.state?.fromSearch) {
-  //     setShowBackButton(true);
-  //   } else {
-  //     setShowBackButton(false);
-  //   }
-  // }, [location]);
-
   const makeSearch = useDebounce(() => {
     const data = searchInputRef.current?.value || '';
     if (data) {
@@ -45,10 +58,6 @@ export const SearchInVideoInput = ({getSearch,setIsActiveInput, isActiveInput }:
         return prev;
       });
       getSearch(data);
-      ReactGA.event({
-        category: 'Search',
-        action: 'Search in playlist',
-      });
     } else {
       setParam((prev) => {
         prev.delete('search');
@@ -77,11 +86,71 @@ export const SearchInVideoInput = ({getSearch,setIsActiveInput, isActiveInput }:
     setParam('')
   };
 
+  const scrollToRef = (value: string, block: 'start' | 'end' | 'center' | 'nearest') => {
+    const ref = refs[value].current;
+    if (ref) {
+      ref.scrollIntoView({behavior: 'smooth', block});
+    }
+  };
+
+  const pickSuggestion = () => {
+    navigate(`/`);
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    const searchInput = searchInputRef.current;
+    if (selectedSuggestion >= 0 && selectedSuggestion < suggestions.length) {
+      switch (e.key) {
+        case 'Escape':
+          setSelectedSuggestion(-1);
+          setOpen(false);
+          break;
+        case 'Enter':
+          onSearch(); // Убедитесь, что onSearch() использует правильное значение
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          if (selectedSuggestion > 0) {
+            setSelectedSuggestion((prev) => prev - 1);
+            searchInput && (searchInput.value = suggestions[selectedSuggestion - 1].textTimecode);
+            scrollToRef(suggestions[selectedSuggestion - 1].textTimecode, 'start');
+          } else {
+            setSelectedSuggestion(-1);
+          }
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          if (selectedSuggestion < suggestions.length - 1) {
+            setSelectedSuggestion((prev) => prev + 1);
+            searchInput && (searchInput.value = suggestions[selectedSuggestion + 1].textTimecode);
+            scrollToRef(suggestions[selectedSuggestion + 1].textTimecode, 'end');
+          } else {
+            setSelectedSuggestion(suggestions.length - 1);
+          }
+          break;
+        default:
+          break;
+      }
+    } else {
+      setSelectedSuggestion(-1);
+    }
+  };
+
+  const refs = useMemo(
+      () =>
+          suggestions.reduce((acc, item) => {
+            acc[item.textTimecode] = createRef<HTMLLIElement>();
+            return acc;
+          }, {} as Record<string, RefObject<HTMLLIElement>>),
+      [suggestions],
+  );
+
   return (
       <div className='flex gap-[10px] h-[40px]'>
         <div className='relative'>
           <input
               type="text"
+              onKeyDown={onKeyDown}
               defaultValue={search}
               ref={searchInputRef}
               onChange={onSearch}
@@ -99,6 +168,38 @@ export const SearchInVideoInput = ({getSearch,setIsActiveInput, isActiveInput }:
               </div>
           }
         </div>
+        {suggestions.length > 0 && isActiveInput && (
+            <SuggestionSearchWrapper>
+              <SuggestionsList>
+                {suggestions.map((suggestion, i) => (
+                    <SuggestionsItem
+                        key={suggestion.start}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          pickSuggestion();
+                        }}
+                        selected={selectedSuggestion === i}
+                        ref={refs[suggestion.textTimecode]}
+                        onMouseEnter={() => {
+                          setSelectedSuggestion(i);
+                        }}
+                    >
+                      <div className='flex gap-2'>
+                        <span
+                            className='text-[#00B856] text-[14px] font-open-sans font-semibold'>{secondsToTime(suggestion.start)}</span>
+                        <LabelText
+                            dangerouslySetInnerHTML={{__html: highlightText(suggestion.textTimecode.slice(0, 150), searchInputRef.current!.value)}}/>
+                      </div>
+                    </SuggestionsItem>
+                ))}
+              </SuggestionsList>
+            </SuggestionSearchWrapper>
+        )}
       </div>
   );
+};
+
+export const highlightText = (text: string, search: string) => {
+  const regex = new RegExp(`(${search})`, 'gi');
+  return text.replace(regex, '<b class="color-highlightText">$1</b>');
 };

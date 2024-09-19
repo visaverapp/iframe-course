@@ -86,10 +86,10 @@ export const ButtonText = styled.p`
 `;
 
 export const LabelText = styled.p`
-  font-weight: 400;
-  font-size: 17px;
-  line-height: 24px;
-  color: ${theme.colors.dark_blue};
+    font-weight: 400;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    color: ${theme.colors.dark_blue};
 `;
 
 export const DescriptionText = styled.p`

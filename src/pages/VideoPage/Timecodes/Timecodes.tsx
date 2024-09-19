@@ -10,12 +10,11 @@ interface TimecodesProps {
   onChange: (value: boolean)=> void
 }
 
-export const Timecodes = memo(({ setTime, playlistId, id, onChange }: TimecodesProps) => {
+export const Timecodes = memo(({ setTime, playlistId, id, onChange, currentTime }: TimecodesProps) => {
   const [showTextIndex, setShowTextIndex] = useState(null)
   const [isCollapsed, setIsCollapsed] = useState(false)
 
   const { data } = useGetTimecodesQuery({ playlistId: playlistId, videoPublicId: id });
-  // const timings = data?.map((array) => array.start) || [];
 
   const toggleText = (index: any) => {
     setShowTextIndex(prevIndex => (prevIndex === index ? null : index));
@@ -26,19 +25,22 @@ export const Timecodes = memo(({ setTime, playlistId, id, onChange }: TimecodesP
     onChange(isCollapsed)
   };
 
+  const timings = data?.map((array) => array.start) || [];
 
+  const highlightChapter = (i: number) => {
+    return currentTime != null && currentTime >= timings[i] && (timings[i + 1] === undefined || currentTime < timings[i + 1]);
+  };
 
   return (
       <div
-          className={`${isCollapsed ? 'h-[100%]': 'h-[100%]' } relative scroll-bar overflow-y-scroll w-[712px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[16px]`}>
+          className={`${isCollapsed ? 'h-[100%]': 'h-[100%]' } relative scroll-bar overflow-y-scroll w-[712px] rounded-[12px] border-white-active border-[1px] py-[8px] px-[8px]`}>
         {data && (
             <ol>
               {data.map(({start, text, title}, i) => (
-                  <li
-                      className='cursor-pointer rounded-[12px] pb-[8px] pr-[8px]' key={i}>
-                    <div onClick={() => setTime(start)}>
+                  <li onClick={() => setTime(start)} className={`${highlightChapter(i) ? 'bg-[#E5E9F2]' : 'bg-white'} hover:bg-white-hover cursor-pointer rounded-[8px] pb-[8px] pr-[8px]`} key={i}>
+                    <div>
                       <span className='text-lite-green font-open-sans font-bold text-[14px] pr-[5px]'>{secondsToTime(start)}</span>
-                      <span className='text-dark-blue font-open-sans font-bold text-[14px]'>{title}</span>
+                      <span className={`text-dark-blue font-open-sans font-bold text-[14px]`}>{title}</span>
                     </div>
                     <div className='flex w-[670px] justify-between'>
                       <span

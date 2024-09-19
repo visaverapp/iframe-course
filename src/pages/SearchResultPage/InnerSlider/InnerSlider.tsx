@@ -36,8 +36,6 @@ const InnerSlider = ({ items }: InnerSliderProps) => {
     slidesToScroll: 1,
     nextArrow: items.cues.length > 3 ? <ArrowButton variant="right" /> : <></> ,
     prevArrow: <ArrowButton />,
-    // centerPadding: '590px',
-    // centerMode: true,
     variableWidth: true,
 
     accessibility: true,

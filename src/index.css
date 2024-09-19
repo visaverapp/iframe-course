@@ -27,3 +27,12 @@ body {
     background: #D3DCE6;
     border-radius: 10px;
 }
+
+.color-highlightText {
+    background: yellow;
+    font-weight: normal;
+}
+.color-highlightTextGreen {
+    color: #00B856;
+    font-weight: normal;
+}

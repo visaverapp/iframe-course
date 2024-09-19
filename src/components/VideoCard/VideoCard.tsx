@@ -1,18 +1,18 @@
-import {useRef} from "react";
+import {memo, useRef} from "react";
 import YouTube from "react-youtube";
 
 interface VideoCardProps {
   video: any
   iframeClassName: string
+  setCurrentTime?: any
+  startsForm?: number
+  iframe?: any
+  onStateChange?: any
+  goToTimeFunc?: any
 }
 
-export const VideoCard = ({video, iframeClassName}:VideoCardProps) => {
-  const iframe = useRef<YouTube>(null);
+export const VideoCard = memo(({video, iframeClassName, iframe, startsForm, goToTimeFunc, onStateChange}:VideoCardProps) => {
   const iframeWrapper = useRef<HTMLDivElement>(null);
-  // const vkRef = useRef<HTMLIFrameElement>(null);
-
-  // const playlistId = 'c92ce130-e837-4db3-8278-638fca4b9f9a'
-  // const startsForm = 0
 
   return (
       <div ref={iframeWrapper}>
@@ -21,9 +21,18 @@ export const VideoCard = ({video, iframeClassName}:VideoCardProps) => {
                      videoId={video.videoId}
                      title={video.title}
                      ref={iframe}
+                     onStateChange={onStateChange}
+                     onReady={goToTimeFunc}
+                     opts={{
+                       playerVars: {
+                         start: video.startsFrom || startsForm,
+                         autoplay: 0,
+                         rel: 0,
+                       },
+                     }}
             />
         )}
       </div>
   );
-};
+})
 

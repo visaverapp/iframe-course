@@ -26,17 +26,17 @@ export const SuggestionsWrapper = styled.div`
 `;
 
 export const SuggestionSearchWrapper = styled(SuggestionsWrapper)`
-    top: 80px;
-    width: 708px;
+    bottom: 207px;
+    width: 711px;
 `;
 
 
 export const SuggestionsList = styled.ul``;
 
 export const SuggestionsItem = styled.li<{ selected: boolean }>`
-    padding: 12px 16px;
+    padding: 3px 16px;
     cursor: pointer;
-    background-color: ${(props) => (props.selected ? theme.colors.white_hover : 'white')};
+    background-color: ${(props) => (props.selected ? theme.colors.white : 'white')};
 
     :hover {
         background-color: ${theme.colors.white_hover};

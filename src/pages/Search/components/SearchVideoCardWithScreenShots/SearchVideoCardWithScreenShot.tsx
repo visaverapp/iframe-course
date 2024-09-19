@@ -28,8 +28,7 @@ export const SearchVideoCardWithScreenShot = ({ videoInfo }: SearchVideoCardProp
           </Header>
           <Main>
             <Title>{videoInfo.title}</Title>
-            {/*<p className='mb-[10px] font-open-sans font-normal text-[#696977] text-[14px]'>{video.description}</p>*/}
-            <p className='mb-[10px] font-bold font-open-sans text-[#000000] text-[16px]'>Подходящие фрагменты: 5</p>
+            <p className='mb-[10px] font-bold font-open-sans text-[#000000] text-[16px]'>{`Подходящие фрагменты: ${videoInfo.cues.length}`}</p>
             <InnerSlider items={videoInfo} />
           </Main>
         </SearchVideoCardStyled>

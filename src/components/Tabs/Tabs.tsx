@@ -1,10 +1,10 @@
 type TabsPropsType = {
   activeTab: number
   onChange: (index: number) => void
+  tabsLabel: string[]
 }
 
-export const Tabs = ({activeTab, onChange}: TabsPropsType) => {
-  const tabsLabel = ["Все (4)", "Фрагменты (3)", "Видео (1)"]
+export const Tabs = ({activeTab, onChange, tabsLabel}: TabsPropsType) => {
 
   return (
       <div className='flex flex-col mb-[12px] w-[99%]'>
