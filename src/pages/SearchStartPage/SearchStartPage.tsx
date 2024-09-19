@@ -10,7 +10,7 @@ const SearchStartPage = () => {
   }
 
   return (
-      <div className='mx-auto mt-[15%] w-[1000px]'>
+      <div className='mt-[15%] w-[1000px]'>
         <div className='mb-[20%]'>
           <SearchInput startSearchPageSettings={startSearchPageSettings}/>
         </div>
