@@ -8,7 +8,7 @@ const SearchStartPage = () => {
 
   const startSearchPageSettings = {
     inputWidth: 'w-[706px]',
-    suggetionsPosition: 'top-[19%] w-[706px]',
+    suggetionsPosition: 'top-[27%] w-[706px]',
     navigatePath: `/search/?search=${currentSearchParams}`
   }
 
