@@ -13,6 +13,11 @@ export const FragmentCardStyled = styled.div`
     gap: 8px;
     border-radius: 8px;
     background-color: #ffffff;
+    position: relative;
+
+    :hover {
+        background: #F4F4F4;
+    }
 `;
 
 export const VideoTime = styled.div`
@@ -36,6 +41,7 @@ export const VideoImageWrapper = styled.div<Pick<FragmentCardProps, 'background_
     background-position: center;
     height: 128px;
     border-radius: 12px;
+    position: relative;
 `;
 
 export const Description = styled(LabelText)`

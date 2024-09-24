@@ -11,22 +11,6 @@ type InnerSliderProps = {
 };
 
 const InnerSlider = ({ items }: InnerSliderProps) => {
-  // const settings = {
-  //   accessibility: true,
-  //   arrows: true,
-  //   dots: false,
-  //   infinite: false,
-  //   slidesToShow: 3,
-  //   slidesToScroll: 1,
-  //   autoplay: false,
-  //   autoplaySpeed: 0,
-  //   speed: 2000,
-  //   swipeToSlide: true,
-  //   draggable: true,
-  //   centerMode: true,
-  //   // centerPadding: '-20',
-
-  // };
 
   const settings = {
     dots: false,
@@ -94,8 +78,6 @@ const InnerSlider = ({ items }: InnerSliderProps) => {
   if (items.cues.length === 0) {
     return null;
   }
-
-  // console.log(items.cues)
 
   return (
       <SliderContainer>

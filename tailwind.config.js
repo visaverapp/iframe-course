@@ -8,7 +8,10 @@ module.exports = {
       sm: '480px',
       md: '768px',
       lg: '976px',
-      xl: '1440px',
+      lm: '1200px',
+      xl: '1400px',
+      xml: '1620px',
+      xxl: '2650px',
     },
     colors: {
       'dark-blue': '#1F2D3D',

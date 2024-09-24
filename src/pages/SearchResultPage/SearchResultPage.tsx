@@ -1,6 +1,6 @@
 import {Tabs} from "@/components/Tabs/Tabs";
 import {Toggle} from '@/components/Toggle/Toggle';
-import {useRef, useState} from "react";
+import {useMemo, useRef, useState} from "react";
 import {
   ResultVideoInnerWithScreenShot
 } from "@/pages/Search/components/ResultVideoInnerWithScreenShot/ResultVideoInnerWithScreenShot";
@@ -23,13 +23,20 @@ export const SearchResultPage = () => {
     query: search.current?.value || params.get("search") || ""
   });
 
-  const searchItemCountAll = `${videos && fragments ? videos.length + fragments.length : ''}`
-  const tabs = [`Все (${searchItemCountAll})`, `Фрагменты (${fragments?.length})`, `Видео (${videos?.length})`]
+  const countFragments = useMemo(() => {
+    if (!fragments) return 0;
+    return fragments.reduce((total, fragment) => {
+      return total + (fragment.cues?.length || 0);
+    }, 0);
+  }, [fragments]);
+
+  const searchItemCountAll = `${videos && fragments ? videos.length + countFragments : ''}`
+  const tabs = [`Все (${toggleActive && params.get('search') ? fragments ? countFragments : 0 :searchItemCountAll})`, `Фрагменты (${countFragments})`, `Видео (${toggleActive && params.get('search') ? 0 : videos ? videos.length : 0})`]
 
   return (
       <div className='pt-[12px]'>
         <div>
-          <div className='absolute left-[18%] top-[10%]'>
+          <div className='absolute left-[18%] top-[12%]'>
             <Toggle title='Искать по точному совпадению' checked={isChecked} onChange={() => setToggleActive(prevState => !prevState)}/>
           </div>
           <Tabs tabsLabel={tabs} activeTab={activeTab} onChange={(index: number) => setActiveTab(index)}/>
@@ -45,7 +52,7 @@ export const SearchResultPage = () => {
               </div>
               :
               activeTab === 1 ? <ResultVideoInnerWithScreenShot search={search}/>
-                  : activeTab === 2 ? <>{videos && videos?.map(video => <SearchVideoCard key={video.publicId}
+                  : activeTab === 2 ? <>{!toggleActive && videos && videos?.map(video => <SearchVideoCard key={video.publicId}
                                                                                          video={video}/>)}</>
                       : <></>
           }

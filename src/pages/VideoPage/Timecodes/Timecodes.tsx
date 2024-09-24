@@ -37,14 +37,14 @@ export const Timecodes = memo(({ setTime, playlistId, id, onChange, currentTime 
         {data && (
             <ol>
               {data.map(({start, text, title}, i) => (
-                  <li onClick={() => setTime(start)} className={`${highlightChapter(i) ? 'bg-[#E5E9F2]' : 'bg-white'} hover:bg-white-hover cursor-pointer rounded-[8px] pb-[8px] pr-[8px]`} key={i}>
-                    <div>
+                  <li className={`${highlightChapter(i) ? 'bg-[#E5E9F2]' : 'bg-white'} hover:bg-white-hover cursor-pointer rounded-[8px] pb-[8px] pr-[8px]`} key={i}>
+                    <div onClick={() => setTime(start)}>
                       <span className='text-lite-green font-open-sans font-bold text-[14px] pr-[5px]'>{secondsToTime(start)}</span>
                       <span className={`text-dark-blue font-open-sans font-bold text-[14px]`}>{title}</span>
                     </div>
                     <div className='flex w-[670px] justify-between'>
-                      <span
-                          className='text-indigo font-open-sans font-normal text-[14px]'>
+                      <span onClick={() => setTime(start)}
+                          className='cursor-pointer text-indigo font-open-sans font-normal text-[14px]'>
                         {showTextIndex === i ? text : text.slice(0, 85) + '...'}
                       </span>
                       <span onClick={() => toggleText(i)}

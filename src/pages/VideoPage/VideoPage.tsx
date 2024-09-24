@@ -72,7 +72,6 @@ export const VideoPage = memo(({showBackButton}: VideoPage) => {
   };
 
   const goToTime = (time: number) => {
-    console.log("Переход к времени:", time);
 
     iframe.current?.internalPlayer.seekTo(time, true);
     iframeWrapper.current?.scrollIntoView({behavior: 'smooth', block: 'center'});

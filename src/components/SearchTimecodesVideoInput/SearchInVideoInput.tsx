@@ -1,12 +1,9 @@
 import {createRef, RefObject, useEffect, useMemo, useRef, useState} from 'react';
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {useDebounce} from "@/hooks/useDebounce";
 import SearchIcon from "@/components/SVGIcons/SearchIcon";
 import {ClearIcon} from "@/components/SVGIcons/ClearIcon";
 import {useGetTimecodesQuery} from "@/api";
-import {secondsToTime} from "@/pages/Search/utils";
-import {SuggestionSearchWrapper, SuggestionsItem, SuggestionsList} from "@/components/SearchInput/SearchInputStyle";
-import {LabelText} from "@/styles";
 
 type SearchInVideoInputPropsType = {
   getSearch: (value: string) => Promise<void>
@@ -21,7 +18,10 @@ export const SearchInVideoInput = ({getSearch, setIsActiveInput, isActiveInput}:
   const [suggestions, setSuggestions] = useState<{ start: number; textTimecode: string; }[]>([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState(-1);
   const [, setOpen] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const search = param.get('search') || '';
 
   const playlistId = "59609dd8-7ef4-4080-9cb8-3c2cab266494"
   const videoId = "5ec5bb33-9c1e-4295-8a82-ca36138da3cb"
@@ -30,18 +30,13 @@ export const SearchInVideoInput = ({getSearch, setIsActiveInput, isActiveInput}:
 
   useEffect(() => {
     if (timecodesData) {
-      console.log(timecodesData)
       const suggestionsList = timecodesData.map(item => ({
         start: item.start,
         textTimecode: item.text
       }));
-      console.log(suggestionsList)
       setSuggestions(suggestionsList)
     }
   }, [])
-
-  const searchInputRef = useRef<HTMLInputElement | null>(null);
-  const search = param.get('search') || '';
 
   useEffect(() => {
     const data = searchInputRef.current?.value || '';
@@ -73,8 +68,10 @@ export const SearchInVideoInput = ({getSearch, setIsActiveInput, isActiveInput}:
   };
 
   const handleBlur = () => {
-    setIsFocused(false);
-    setIsActiveInput(false)
+    if (searchInputRef.current && searchInputRef.current.value === '') {
+      setIsFocused(false);
+      setIsActiveInput(false)
+    }
   };
 
   const onSearch = () => {
@@ -82,9 +79,14 @@ export const SearchInVideoInput = ({getSearch, setIsActiveInput, isActiveInput}:
   };
 
   const clearInput = () => {
-    searchInputRef.current!.value = '';
-    setParam('')
+    if (searchInputRef.current) {
+      searchInputRef.current.value = '';
+      searchInputRef.current!.focus();
+    }
+    setParam('');
+    setIsActiveInput(true)
   };
+
 
   const scrollToRef = (value: string, block: 'start' | 'end' | 'center' | 'nearest') => {
     const ref = refs[value].current;
@@ -93,9 +95,9 @@ export const SearchInVideoInput = ({getSearch, setIsActiveInput, isActiveInput}:
     }
   };
 
-  const pickSuggestion = () => {
-    navigate(`/`);
-  };
+  // const pickSuggestion = () => {
+  //   navigate(`/`);
+  // };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const searchInput = searchInputRef.current;
@@ -168,38 +170,38 @@ export const SearchInVideoInput = ({getSearch, setIsActiveInput, isActiveInput}:
               </div>
           }
         </div>
-        {suggestions.length > 0 && isActiveInput && (
-            <SuggestionSearchWrapper>
-              <SuggestionsList>
-                {suggestions.map((suggestion, i) => (
-                    <SuggestionsItem
-                        key={suggestion.start}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          pickSuggestion();
-                        }}
-                        selected={selectedSuggestion === i}
-                        ref={refs[suggestion.textTimecode]}
-                        onMouseEnter={() => {
-                          setSelectedSuggestion(i);
-                        }}
-                    >
-                      <div className='flex gap-2'>
-                        <span
-                            className='text-[#00B856] text-[14px] font-open-sans font-semibold'>{secondsToTime(suggestion.start)}</span>
-                        <LabelText
-                            dangerouslySetInnerHTML={{__html: highlightText(suggestion.textTimecode.slice(0, 150), searchInputRef.current!.value)}}/>
-                      </div>
-                    </SuggestionsItem>
-                ))}
-              </SuggestionsList>
-            </SuggestionSearchWrapper>
-        )}
+        {/*{suggestions.length > 0 && isActiveInput && (*/}
+        {/*    <SuggestionSearchWrapper>*/}
+        {/*      <SuggestionsList>*/}
+        {/*        {suggestions.map((suggestion, i) => (*/}
+        {/*            <SuggestionsItem*/}
+        {/*                key={suggestion.start}*/}
+        {/*                onClick={(e) => {*/}
+        {/*                  e.stopPropagation();*/}
+        {/*                  pickSuggestion();*/}
+        {/*                }}*/}
+        {/*                selected={selectedSuggestion === i}*/}
+        {/*                ref={refs[suggestion.textTimecode]}*/}
+        {/*                onMouseEnter={() => {*/}
+        {/*                  setSelectedSuggestion(i);*/}
+        {/*                }}*/}
+        {/*            >*/}
+        {/*              <div className='flex gap-2'>*/}
+        {/*                <span*/}
+        {/*                    className='text-[#00B856] text-[14px] font-open-sans font-semibold'>{secondsToTime(suggestion.start)}</span>*/}
+        {/*                <LabelText*/}
+        {/*                    dangerouslySetInnerHTML={{__html: highlightText(suggestion.textTimecode.slice(0, 150), searchInputRef.current!.value)}}/>*/}
+        {/*              </div>*/}
+        {/*            </SuggestionsItem>*/}
+        {/*        ))}*/}
+        {/*      </SuggestionsList>*/}
+        {/*    </SuggestionSearchWrapper>*/}
+        {/*)}*/}
       </div>
   );
 };
 
-export const highlightText = (text: string, search: string) => {
-  const regex = new RegExp(`(${search})`, 'gi');
-  return text.replace(regex, '<b class="color-highlightText">$1</b>');
-};
+// export const highlightText = (text: string, search: string) => {
+//   const regex = new RegExp(`(${search})`, 'gi');
+//   return text.replace(regex, '<b class="color-highlightText">$1</b>');
+// };

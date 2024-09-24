@@ -14,7 +14,7 @@ export const SearchVideoCard = memo(({video}: SearchVideoCardProps) => {
   return (
       <Link to={'/'} state={{fromSearch: true}}>
         <div
-            className='cursor-pointer p-[20px] ml-[14px] mb-[12px] flex gap-[32px] bg-white rounded-[12px] w-[1312px] h-[248px]'>
+            className='hover:bg-white-hover cursor-pointer p-[20px] ml-[14px] mb-[12px] flex gap-[32px] bg-white rounded-[12px] w-[1312px] h-[248px]'>
           <VideoCard video={data} iframeClassName='w-[320px] h-[208px] rounded-[12px]'/>
           <div className='flex flex-col'>
             <p className='font-open-sans font-bold text-[14px] text-indigo pt-[30px]'>{data.title}</p>

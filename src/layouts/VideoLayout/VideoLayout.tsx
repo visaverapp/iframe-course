@@ -7,14 +7,14 @@ import {SearchInput} from "@/components/SearchInput/SearchInput";
 
 export const VideoLayout = () => {
   const location = useLocation();
-  const [showBackButton, setShowBackButton] = useState(false);
+  const [showBackButton, setShowBackButton] = useState(true);
 
 
   useEffect(() => {
     if (location.state?.fromSearch) {
       setShowBackButton(true);
     } else {
-      setShowBackButton(false);
+      setShowBackButton(true);
     }
   }, [location]);
 

@@ -6,3 +6,7 @@ export interface VideoFragmentCardProps {
   goToTime?: (time: number) => void;
   videoPreview?: string | null;
 }
+
+export interface PlaylistCardStyleProps {
+  bgImage: string | null;
+}
