@@ -44,6 +44,11 @@ export const SearchInput = ({startSearchPageSettings}: SearchInputPropsType) => 
       const suggetionsList = [...suggetionsFragment, ...suggetionsVideo]
       setSuggetions(suggetionsList)
     }
+
+    if (search.current) {
+      search.current.focus();
+    }
+
   }, [video])
 
 
@@ -61,10 +66,13 @@ export const SearchInput = ({startSearchPageSettings}: SearchInputPropsType) => 
     makeSearch();
   };
 
-  const pickSuggestion = () => {
-    if (startSearchPageSettings) {
+  const pickSuggestion = (content?: string) => {
+    if (startSearchPageSettings && !content) {
       navigate(`${startSearchPageSettings.navigatePath}`);
-    } else {
+    } else if (content) {
+      navigate(`/search/?search=${content}`)
+    }
+    else {
     navigate(`/`);
     }
   };
@@ -134,7 +142,7 @@ export const SearchInput = ({startSearchPageSettings}: SearchInputPropsType) => 
                   return (
                       <>
                         {item.content &&
-                            <li onClick={pickSuggestion}
+                            <li onClick={()=>pickSuggestion(item.content)}
                                 className='gap-1 px-[12px] py-[8px] cursor-pointer hover:bg-white-hover flex pb-1'>
                                 <PlayIconSuggetions/>
                                 <span
@@ -148,7 +156,7 @@ export const SearchInput = ({startSearchPageSettings}: SearchInputPropsType) => 
                   return (
                       <>
                         {fragment.fragmentText &&
-                            <li onClick={pickSuggestion}
+                            <li onClick={()=>pickSuggestion(fragment.fragmentText)}
                                 className='flex gap-1 px-[12px] py-[8px] cursor-pointer hover:bg-white-hover'>
                                 <FragmentPlayIconSuggetions/>
                                 <div className='w-fit'>

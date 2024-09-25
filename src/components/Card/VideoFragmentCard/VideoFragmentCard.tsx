@@ -13,10 +13,10 @@ export const VideoFragmentCard = ({
 
   return (
       <div onClick={goToHandler}>
-        <div>
+        <div className='flex'>
         <span
             className='cursor-pointer text-[#00B856] font-open-sans font-bold text-[14px] pr-[5px]'>{secondsToTime(startsFrom)}</span>
-          <span className='cursor-pointer text-dark-blue font-open-sans font-bold text-[14px]'>Стратегии продвижения на рынке.</span>
+          {/*<span className='cursor-pointer text-dark-blue font-open-sans font-bold text-[14px]'>Стратегии продвижения на рынке.</span>*/}
           <p className='cursor-pointer w-[685px] text-dark-blue font-open-sans font-normal text-[14px]'
              dangerouslySetInnerHTML={{__html: fragment.content}}/>
         </div>
